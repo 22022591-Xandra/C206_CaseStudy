@@ -14,5 +14,25 @@
  *
  */
 public class Feedback {
+	 private int id;
+	    private String message;
 
-}
+	    public Feedback(int id, String message) {
+	        this.id = id;
+	        this.message = message;
+	    }
+
+	    public int getId() {
+	        return id;
+	    }
+
+	    public String getMessage() {
+	        return message;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Feedback #" + id + ": " + message;
+	    }
+	}
+

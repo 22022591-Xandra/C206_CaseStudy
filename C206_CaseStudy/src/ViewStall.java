@@ -9,8 +9,7 @@ public class ViewStall {
 	public String getName() {
 		return name;
 	}
-	
-	
+
 
 
 }
