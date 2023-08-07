@@ -1,8 +1,8 @@
 
-public class Stall {
+public class ViewStall {
 	private String name;
 
-	public Stall(String name) {
+	public ViewStall(String name) {
 		this.name = name;
 	}
 
@@ -10,5 +10,7 @@ public class Stall {
 		return name;
 	}
 	
+	
+
 
 }
