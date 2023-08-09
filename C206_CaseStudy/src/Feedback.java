@@ -16,10 +16,12 @@
 public class Feedback {
 	 private int id;
 	    private String message;
+	    private User user;
 
-	    public Feedback(int id, String message) {
+	    public Feedback(int id, String message, User user) {
 	        this.id = id;
 	        this.message = message;
+	        this.user = user;
 	    }
 
 	    public int getId() {
@@ -34,5 +36,9 @@ public class Feedback {
 	    public String toString() {
 	        return "Feedback #" + id + ": " + message;
 	    }
+
+		public User getUser() {
+			return user;
+		}
 	}
 
