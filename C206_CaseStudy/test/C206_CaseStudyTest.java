@@ -45,14 +45,14 @@ public class C206_CaseStudyTest {
 	stall3 = new Stall("Ayam Penyet", "Malay Cuisine");
 	stall4 = new Stall("Cheng's Dog", "Chinese Cuisine");
 
-	menu1 = new Menu("Burger", 5.00, stallList.get(0));
-	menu2 = new Menu("Fries", 5.00, stallList.get(0));
-	menu3 = new Menu("Ricecake", 5.00, stallList.get(1));
-	menu4 = new Menu("Ramyun", 5.00, stallList.get(1));
-	menu5 = new Menu("Ayam", 5.00, stallList.get(2));
-	menu6 = new Menu("Nasi", 5.00, stallList.get(2));
-	menu7 = new Menu("Dog", 5.00, stallList.get(3));
-	menu8 = new Menu("Cat", 5.00, stallList.get(3));
+	menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
+	menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
+	menuList.add(new Menu("Ricecake", 5.00, "Kim's Ricecake"));
+	menuList.add(new Menu("Ramyun", 5.00, "Kim's Ricecake"));
+	menuList.add(new Menu("Ayam", 5.00, "Ayam Penyet"));
+	menuList.add(new Menu("Nasi", 5.00, "Ayam Penyet"));
+	menuList.add(new Menu("Dog", 5.00, "Cheng's Dog"));
+	menuList.add(new Menu("Cat", 5.00, "Cheng's Dog"));
 
 	
 	order1 = new Order("Customer Test", "READY", false, menuList.get(0));
@@ -61,15 +61,16 @@ public class C206_CaseStudyTest {
 	fb1 = new Feedback(1, "Hi", userList.get(0));
 	fb2 = new Feedback(2, "Hullo", userList.get(1));
 	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	
 	@Test
 	public void c206_test() {
 		//fail("Not yet implemented"); 
 		assertTrue("C206_CaseStudy_SampleTest ",true);
 	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
 
 }

@@ -19,14 +19,14 @@ public class C206_CaseStudy {
 		stallList.add(new Stall("Ayam Penyet", "Malay Cuisine"));
 		stallList.add(new Stall("Cheng's Dog", "Chinese Cuisine"));
 
-		menuList.add(new Menu("Burger", 5.00, stallList.get(0)));
-		menuList.add(new Menu("Fries", 5.00, stallList.get(0)));
-		menuList.add(new Menu("Ricecake", 5.00, stallList.get(1)));
-		menuList.add(new Menu("Ramyun", 5.00, stallList.get(1)));
-		menuList.add(new Menu("Ayam", 5.00, stallList.get(2)));
-		menuList.add(new Menu("Nasi", 5.00, stallList.get(2)));
-		menuList.add(new Menu("Dog", 5.00, stallList.get(3)));
-		menuList.add(new Menu("Cat", 5.00, stallList.get(3)));
+		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
+		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
+		menuList.add(new Menu("Ricecake", 5.00, "Kim's Ricecake"));
+		menuList.add(new Menu("Ramyun", 5.00, "Kim's Ricecake"));
+		menuList.add(new Menu("Ayam", 5.00, "Ayam Penyet"));
+		menuList.add(new Menu("Nasi", 5.00, "Ayam Penyet"));
+		menuList.add(new Menu("Dog", 5.00, "Cheng's Dog"));
+		menuList.add(new Menu("Cat", 5.00, "Cheng's Dog"));
 
 		userList.add(new User("Customer Test", "c@gmail.com", "1234"));
 		userList.add(new User("Staff Test", "s@gmail.com", "5678", true));
@@ -213,7 +213,7 @@ public class C206_CaseStudy {
 			output += "Menu:\n";
 
 			for (Menu menu : menuList) {
-				if (menu.getStall().equals(stall)) {
+				if (menu.getStall().equals(stall.getName())) {
 					output += String.format("%s - %.2f\n", menu.getItemname(), menu.getPrice());
 				}
 			}
@@ -224,10 +224,43 @@ public class C206_CaseStudy {
 
 	private static void addMenu() {
 		// TODO: Implement the logic to add a menu item
+		Helper.line(50, "=");
+		System.out.println("ADD MENU ITEM");
+		Helper.line(50, "=");
+		
+		
+		String stall  = Helper.readString("Enter the stall name you want to add menu to > ");
+		String itemname = Helper.readString("Enter menu item >");
+		Double price = Helper.readDouble("Enter price of food > ");
+		
+		menuList.add(new Menu(itemname, price, stall));
+		System.out.println("Added successfully!");
+
 	}
 
 	private static void deleteMenu() {
 		// TODO: Implement the logic to delete a menu item
+		Helper.line(50, "=");
+		System.out.println("DELETE MENU");
+		Helper.line(50, "=");
+		
+		if (menuList.isEmpty()) {
+			System.out.println("No menu item available to delete.");
+		} else {
+			viewMenu();
+
+			int menuIndex = Helper.readInt("Enter the number of the menus to delete > ");
+			menuIndex--;
+
+			if (menuIndex >= 0 && menuIndex < menuList.size()) {
+				menuList.remove(menuIndex);
+				System.out.println("Menu item deleted successfully!");
+			} else {
+				System.out.println("Invalid menu index!");
+			}
+		}
+		
+		
 	}
 
 	private static void viewAllStalls(ArrayList<Stall> stallList) {

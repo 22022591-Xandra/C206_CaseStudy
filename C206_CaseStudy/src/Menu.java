@@ -13,9 +13,9 @@
 public class Menu {
 	private String itemname;
 	private double price;
-	private Stall stall;
+	private String stall;
 
-	public Menu(String itemname, double price, Stall stall) {
+	public Menu(String itemname, double price, String stall) {
 		this.itemname = itemname;
 		this.price = price;
 		this.stall = stall;
@@ -29,7 +29,7 @@ public class Menu {
 		return price;
 	}
 
-	public Stall getStall() {
+	public String getStall() {
 		return stall;
 	}
 	
