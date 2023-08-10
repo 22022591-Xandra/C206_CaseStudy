@@ -2,14 +2,14 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
-	private static boolean isLoggedIn = false;
-	private static User currentUser = null;
+	public static boolean isLoggedIn = false;
+	public static User currentUser = null;
 
-	private static ArrayList<Stall> stallList = new ArrayList<Stall>();
-	private static ArrayList<Menu> menuList = new ArrayList<Menu>();
-	private static ArrayList<User> userList = new ArrayList<User>();
-	private static ArrayList<Order> orderList = new ArrayList<Order>();
-	private static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
+	public static ArrayList<Stall> stallList = new ArrayList<Stall>();
+	public static ArrayList<Menu> menuList = new ArrayList<Menu>();
+	public static ArrayList<User> userList = new ArrayList<User>();
+	public static ArrayList<Order> orderList = new ArrayList<Order>();
+	public static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -129,7 +129,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void menuVisitor() {
+	public static void menuVisitor() {
 		Helper.line(50, "=");
 		System.out.println("VISITOR");
 		Helper.line(50, "=");
@@ -139,7 +139,7 @@ public class C206_CaseStudy {
 		System.out.println("4 - Quit");
 	}
 
-	private static void menuCustomer() {
+	public static void menuCustomer() {
 		// TODO Auto-generated method stub
 		Helper.line(50, "=");
 		System.out.println("CUSTOMER");
@@ -152,7 +152,7 @@ public class C206_CaseStudy {
 		System.out.println("6 - Quit");
 	}
 
-	private static void menuStaff() {
+	public static void menuStaff() {
 		Helper.line(50, "=");
 		System.out.println("STAFF");
 		Helper.line(50, "=");
@@ -174,7 +174,7 @@ public class C206_CaseStudy {
 		System.out.println("16 - Quit");
 	}
 
-	private static void makePayment() {
+	public static void makePayment() {
 		Helper.line(50, "=");
 		System.out.println("MAKE PAYMENT");
 		Helper.line(50, "=");
@@ -202,7 +202,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void viewMenu() {
+	public static void viewMenu() {
 		Helper.line(50, "=");
 		System.out.println("MENU");
 		Helper.line(50, "=");
@@ -222,7 +222,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static void addMenu() {
+	public static void addMenu() {
 		// TODO: Implement the logic to add a menu item
 		Helper.line(50, "=");
 		System.out.println("ADD MENU ITEM");
@@ -238,7 +238,7 @@ public class C206_CaseStudy {
 
 	}
 
-	private static void deleteMenu() {
+	public static void deleteMenu() {
 		// TODO: Implement the logic to delete a menu item
 		Helper.line(50, "=");
 		System.out.println("DELETE MENU");
@@ -263,7 +263,7 @@ public class C206_CaseStudy {
 		
 	}
 
-	private static void viewAllStalls(ArrayList<Stall> stallList) {
+	public static void viewAllStalls(ArrayList<Stall> stallList) {
 		// TODO Auto-generated method stub
 		Helper.line(50, "=");
 		System.out.println("STALL LIST");
@@ -277,14 +277,14 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static void addStall() {
+	public static void addStall() {
 		String name = Helper.readString("Enter Stall Name > ");
 		String description = Helper.readString("Enter Description > ");
 		stallList.add(new Stall(name, description));
 		System.out.println("Stall added successfully!");
 	}
 
-	private static void deleteStall() {
+	public static void deleteStall() {
 		Helper.line(50, "=");
 		System.out.println("DELETE STALL");
 		Helper.line(50, "=");
@@ -306,7 +306,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void viewAllUsers(ArrayList<User> userList) {
+	public static void viewAllUsers(ArrayList<User> userList) {
 		Helper.line(50, "=");
 		System.out.println("USER LIST");
 		Helper.line(50, "=");
@@ -320,7 +320,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static void addUser() {
+	public static void addUser() {
 		Helper.line(50, "=");
 		System.out.println("ADD USER");
 		Helper.line(50, "=");
@@ -334,7 +334,7 @@ public class C206_CaseStudy {
 		System.out.println("User added successfully!");
 	}
 
-	private static void deleteUser() {
+	public static void deleteUser() {
 		Helper.line(50, "=");
 		System.out.println("DELETE USER");
 		Helper.line(50, "=");
@@ -356,7 +356,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static boolean loginCheck(String email, String password, ArrayList<User> userList) {
+	public static boolean loginCheck(String email, String password, ArrayList<User> userList) {
 		for (User user : userList) {
 			if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
 				currentUser = user;
@@ -366,14 +366,14 @@ public class C206_CaseStudy {
 		return false;
 	}
 
-	private static void getRegister() {
+	public static void getRegister() {
 		String name = Helper.readString("Enter Name > ");
 		String email = Helper.readString("Enter Email > ");
 		String pass = Helper.readString("Enter Password > ");
 		userList.add(new User(name, email, pass));
 	}
 
-	private static void addOrder() {
+	public static void addOrder() {
 		String userName = currentUser.getName();
 		boolean takeaway = Helper.readBoolean("Is it a takeaway? (true/false) > ");
 
@@ -393,7 +393,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void viewOrder() {
+	public static void viewOrder() {
 		Helper.line(50, "=");
 		System.out.println("VIEW ORDERS");
 		Helper.line(50, "=");
@@ -412,7 +412,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void deleteOrder() {
+	public static void deleteOrder() {
 		Helper.line(50, "=");
 		System.out.println("DELETE ORDER");
 		Helper.line(50, "=");
@@ -434,14 +434,14 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void addFeedback() {
+	public static void addFeedback() {
 		String message = Helper.readString("Enter your feedback message > ");
 		int feedbackId = feedbackList.size() + 1;
 		feedbackList.add(new Feedback(feedbackId, message, currentUser));
 		System.out.println("Feedback added successfully!");
 	}
 
-	private static void viewFeedback() {
+	public static void viewFeedback() {
 		Helper.line(50, "=");
 		System.out.println("VIEW FEEDBACK");
 		Helper.line(50, "=");
@@ -459,7 +459,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void deleteFeedback() {
+	public static void deleteFeedback() {
 		Helper.line(50, "=");
 		System.out.println("DELETE FEEDBACK");
 		Helper.line(50, "=");
@@ -487,7 +487,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	private static void viewQueue() {
+	public static void viewQueue() {
 		
 	}
 }
