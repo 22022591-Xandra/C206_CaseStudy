@@ -68,13 +68,6 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ",true);
 	}
 
-	public void testAddStall() {
-		//Check whether stallList is not null and it is empty
-		assertNotNull("Test if there is a valid Stall arraylist to add to", stallList);
-		assertEquals("Test that the Stall arraylist is empty.", 0, stallList.size());
-		// Given that it is an empty list, after adding 1 item, it increases the size of the list to 1
-		C206_CaseStudy.addStall();
-	}
 
 	@After
 	public void tearDown() throws Exception {
