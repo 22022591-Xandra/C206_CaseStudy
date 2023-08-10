@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class C206_CaseStudyTest {
-	//test data
+	// test data
 	private User user1;
 	private User user2;
 	private Stall stall1;
@@ -27,13 +27,15 @@ public class C206_CaseStudyTest {
 	private Feedback fb1;
 	private Feedback fb2;
 
+	private ArrayList<User> userList;
+	private ArrayList<Stall> stallList;
+	private ArrayList<Menu> menuList;
+	private ArrayList<Order> orderList;
+	private ArrayList<Feedback> feedbackList;
 
-	private static ArrayList<User> userList = new ArrayList<User>();
-	private static ArrayList<Stall> stallList = new ArrayList<Stall>();
-	private static ArrayList<Menu> menuList = new ArrayList<Menu>();
-	private static ArrayList<Order> orderList = new ArrayList<Order>();
-	private static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
-
+	public C206_CaseStudyTest() {
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,24 +56,91 @@ public class C206_CaseStudyTest {
 		menuList.add(new Menu("Dog", 5.00, "Cheng's Dog"));
 		menuList.add(new Menu("Cat", 5.00, "Cheng's Dog"));
 
-
 		order1 = new Order("Customer Test", "READY", false, menuList.get(0));
-		order2= new Order("Customer Test2", "PENDING", true, menuList.get(1));
+		order2 = new Order("Customer Test2", "PENDING", true, menuList.get(1));
 
 		fb1 = new Feedback(1, "Hi", userList.get(0));
 		fb2 = new Feedback(2, "Hullo", userList.get(1));
 	}
 
 	@Test
-	public void c206_test() {
-		//fail("Not yet implemented"); 
-		assertTrue("C206_CaseStudy_SampleTest ",true);
+	public void testAddUser() {
+		assertNotNull("Test if there is valid User arraylist to add to", userList);
+		assertEquals("Test that the User arraylist is empty.", 0, userList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addUser(userList, user1);
+		assertEquals("Test that the User arraylist size is 1.", 1, userList.size());
+
+		// Add an item
+		C206_CaseStudy.addUser(userList, user2);
+		assertEquals("Test that the User arraylist size is now 2.", 2, userList.size());
+
+		// The item just added is as same as the last item in the list
+		assertSame("Test that User is added to the end of the list.", user2, userList.get(1));
+
+		// Add an item that already exists in the list
+		C206_CaseStudy.addUser(userList, user2);
+		assertEquals("Test that the User arraylist size is unchange.", 2, userList.size());
+
+		// Add an item that has missing detail
+		User user_missing = new User("Customer Test", "", "1234");
+		C206_CaseStudy.addUser(userList, user_missing);
+		assertEquals("Test that the User arraylist size is unchange.", 2, userList.size());
 	}
 
+	public void testAddStall() {
+		assertNotNull("Test if there is valid Stall arraylist to add to", stallList);
+		assertEquals("Test that the Stall arraylist is empty.", 0, stallList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addStall(stallList, stall1);
+		assertEquals("Test that the Stall arraylist size is 1.", 1, stallList.size());
+
+		// Add an item
+		C206_CaseStudy.addStall(stallList, stall2);
+		assertEquals("Test that the User arraylist size is now 2.", 2, stallList.size());
+
+		// The item just added is as same as the last item in the list
+		assertSame("Test that User is added to the end of the list.", user2, stallList.get(1));
+
+		// Add an item that already exists in the list
+		C206_CaseStudy.addStall(stallList, stall2);
+		assertEquals("Test that the User arraylist size is unchange.", 2, stallList.size());
+
+		// Add an item that has missing detail
+		User stall_missing = new Stall("Kim's Ricecake","");
+		C206_CaseStudy.addStall(stallList, stall_missing);
+		assertEquals("Test that the Stall arraylist size is unchange.", 2, stallList.size());
+	}
+
+	@Test
+	public void c206_test() {
+		// fail("Not yet implemented");
+		assertTrue("C206_CaseStudy_SampleTest ", true);
+	}
 
 	@After
 	public void tearDown() throws Exception {
+		user1 = null;
+		user2 = null;
+		stall1 = null;
+		stall2 = null;
+		stall3 = null;
+		stall4 = null;
+		menu1 = null;
+		menu2 = null;
+		menu3 = null;
+		menu4 = null;
+		menu5 = null;
+		menu6 = null;
+		menu7 = null;
+		menu8 = null;
+		order1 = null;
+		order2 = null;
+		fb1 = null;
+		fb2 = null;
+		userList = null;
+		stallList = null;
+	
 	}
-
 
 }
