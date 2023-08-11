@@ -20,8 +20,9 @@ public class Queue {
   private int qNumber;
   
   
-  public Queue(String userName, int qNumber) {
+  public Queue(String userName, String itemname, int qNumber) {
     this.userName = userName;
+    this.itemname = itemname;
     this.qNumber = qNumber;
   }
   public String getUserName() {
