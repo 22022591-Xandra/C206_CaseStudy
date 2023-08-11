@@ -1,4 +1,18 @@
+/*
+ * I declare that this code was written by me. 
+ * I do not copy or allow others to copy my code. 
+ * I understand that copying code is considered as plagiarism.
+ * 
+ * Student Name: tay xin yu
+ * Student ID: 22012885
+ * Class: C206-5D-W64M-A
+ * Date/Time created: Monday 07-08-2023 13:30
+ */
 
+/**
+ * @author  22012885
+ *
+ */
 
 public class User{
 	String name;
