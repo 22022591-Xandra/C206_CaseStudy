@@ -17,7 +17,7 @@ public class C206_CaseStudy {
 		stallList.add(new Stall("XY's Burgs and Fries", "Western Cuisine"));
 		stallList.add(new Stall("Kim's Ricecake", "Korean Cuisine"));
 		stallList.add(new Stall("Ayam Penyet", "Malay Cuisine"));
-		stallList.add(new Stall("Cheng's Dog", "Chinese Cuisine"));
+		stallList.add(new Stall("Cheng's Noodles", "Chinese Cuisine"));
 
 		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
 		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
@@ -25,8 +25,8 @@ public class C206_CaseStudy {
 		menuList.add(new Menu("Ramyun", 5.00, "Kim's Ricecake"));
 		menuList.add(new Menu("Ayam", 5.00, "Ayam Penyet"));
 		menuList.add(new Menu("Nasi", 5.00, "Ayam Penyet"));
-		menuList.add(new Menu("Dog", 5.00, "Cheng's Dog"));
-		menuList.add(new Menu("Cat", 5.00, "Cheng's Dog"));
+		menuList.add(new Menu("Wanton", 5.00, "Cheng's Noodles"));
+		menuList.add(new Menu("MeePok", 5.00, "Cheng's Noodles"));
 
 		userList.add(new User("Customer Test", "c@gmail.com", "1234"));
 		userList.add(new User("Staff Test", "s@gmail.com", "5678", true));
@@ -70,19 +70,11 @@ public class C206_CaseStudy {
 					// VIEW MENU
 					if (option == 1) {
 						C206_CaseStudy.viewMenu();
-						C206_CaseStudy.viewAllStalls(stallList);
-						C206_CaseStudy.viewAllUsers(userList);
-
-						// ADD ORDER
-					} else if (option == 2) {
+					} else if (option == 2) {// ADD ORDER
 						C206_CaseStudy.addOrder();
-
-						
-						// ADD FEEDBACK
-					} else if (option == 3) {
+					} else if (option == 3) {// ADD FEEDBACK
 						C206_CaseStudy.addFeedback();
-						// MAKE PAYMENT
-					} else if (option == 4) {
+					} else if (option == 4) {// MAKE PAYMENT
 						C206_CaseStudy.makePayment();
 					} else if (option == 5) {
 						isLoggedIn = false;
@@ -489,6 +481,21 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewQueue() {
-		
+		Helper.line(50, "=");
+		System.out.println("VIEW QUEUE");
+		Helper.line(50, "=");
+
+		if (orderList.isEmpty()) {
+			System.out.println("No orders available.");
+		} else {
+			for (int i = 0; i < orderList.size(); i++) {
+				System.out.println("QUEUE: " + (i + 1));
+				System.out.println("User: " + orderList.get(i).getUserName());
+				System.out.println("Item: " + orderList.get(i).getItem().getItemname());
+				System.out.println("Status: " + orderList.get(i).getStatus());
+				System.out.println("Takeaway: " + (orderList.get(i).isTakeaway() ? "Yes" : "No"));
+				System.out.println("=============================");
+			}
+		}
 	}
 }
