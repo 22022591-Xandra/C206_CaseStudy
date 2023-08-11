@@ -5,15 +5,18 @@ public class C206_CaseStudy {
 	public static boolean isLoggedIn = false;
 	public static User currentUser = null;
 
+	public static ArrayList<User> userList = new ArrayList<User>();
 	public static ArrayList<Stall> stallList = new ArrayList<Stall>();
 	public static ArrayList<Menu> menuList = new ArrayList<Menu>();
-	public static ArrayList<User> userList = new ArrayList<User>();
 	public static ArrayList<Order> orderList = new ArrayList<Order>();
 	public static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		userList.add(new User("Customer Test", "c@gmail.com", "1234"));
+		userList.add(new User("Staff Test", "s@gmail.com", "5678", true));
+		
 		stallList.add(new Stall("XY's Burgs and Fries", "Western Cuisine"));
 		stallList.add(new Stall("Kim's Ricecake", "Korean Cuisine"));
 		stallList.add(new Stall("Ayam Penyet", "Malay Cuisine"));
@@ -27,9 +30,6 @@ public class C206_CaseStudy {
 		menuList.add(new Menu("Nasi", 5.00, "Ayam Penyet"));
 		menuList.add(new Menu("Wanton", 5.00, "Cheng's Noodles"));
 		menuList.add(new Menu("MeePok", 5.00, "Cheng's Noodles"));
-
-		userList.add(new User("Customer Test", "c@gmail.com", "1234"));
-		userList.add(new User("Staff Test", "s@gmail.com", "5678", true));
 
 		orderList.add(new Order("Customer Test", "READY", false, menuList.get(0)));
 		orderList.add(new Order("Customer Test2", "PENDING", true, menuList.get(1)));
