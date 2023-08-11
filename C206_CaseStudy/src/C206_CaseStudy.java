@@ -228,9 +228,18 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 		System.out.println("ADD MENU ITEM");
 		Helper.line(50, "=");
-
-		String stall = Helper.readString("Enter the stall name you want to add menu to > ");
-		String itemname = Helper.readString("Enter menu item >");
+		boolean stallcheck = false;
+		String stall = "";
+		
+		while (stallcheck != true) {
+			stall = Helper.readString("Enter the stall name you want to add menu to > ");
+			for (Stall s : stallList) {
+				if (s.getName().equalsIgnoreCase(stall)) {
+					stallcheck = true;
+				}
+			}
+		}
+		String itemname = Helper.readString("Enter menu item > ");
 		Double price = Helper.readDouble("Enter price of food > ");
 
 		menuList.add(new Menu(itemname, price, stall));
@@ -401,6 +410,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < orderList.size(); i++) {
 				System.out.println("ORDER " + (i + 1));
 				System.out.println("User: " + orderList.get(i).getUserName());
+				System.out.println("Stall: " + orderList.get(i).getItem().getStall());
 				System.out.println("Item: " + orderList.get(i).getItem().getItemname());
 				System.out.println("Status: " + orderList.get(i).getStatus());
 				System.out.println("Takeaway: " + (orderList.get(i).isTakeaway() ? "Yes" : "No"));
@@ -495,6 +505,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < orderList.size(); i++) {
 				System.out.println("QUEUE: " + (i + 1));
 				System.out.println("User: " + orderList.get(i).getUserName());
+				System.out.println("Stall: " + orderList.get(i).getItem().getStall());
 				System.out.println("Item: " + orderList.get(i).getItem().getItemname());
 				System.out.println("Status: " + orderList.get(i).getStatus());
 				System.out.println("Takeaway: " + (orderList.get(i).isTakeaway() ? "Yes" : "No"));
