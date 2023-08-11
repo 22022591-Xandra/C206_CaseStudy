@@ -82,7 +82,7 @@ public class C206_CaseStudy {
 				}
 				// STAFF VIEW
 			} else if (currentUser != null && currentUser.getEmp() == true) {
-				while (option != 20) {
+				while (option != 19) {
 					C206_CaseStudy.menuStaff();
 					option = Helper.readInt("Enter an option > ");
 
@@ -141,7 +141,6 @@ public class C206_CaseStudy {
 	}
 
 	public static void menuCustomer() {
-		// TODO Auto-generated method stub
 		Helper.line(50, "=");
 		System.out.println("CUSTOMER");
 		Helper.line(50, "=");
@@ -150,7 +149,6 @@ public class C206_CaseStudy {
 		System.out.println("3 - Add Feedback");
 		System.out.println("4 - Make Payment");
 		System.out.println("5 - Log Out");
-		System.out.println("6 - Quit");
 	}
 
 	public static void menuStaff() {
@@ -176,7 +174,6 @@ public class C206_CaseStudy {
 		System.out.println("17 - View Feedback");
 		System.out.println("18 - Delete Feedback");
 		System.out.println("19 - Log Out");
-		System.out.println("20 - Quit");
 	}
 
 	public static void makePayment() {
@@ -228,7 +225,6 @@ public class C206_CaseStudy {
 	}
 
 	public static void addMenu() {
-		// TODO: Implement the logic to add a menu item
 		Helper.line(50, "=");
 		System.out.println("ADD MENU ITEM");
 		Helper.line(50, "=");
@@ -243,7 +239,6 @@ public class C206_CaseStudy {
 	}
 
 	public static void deleteMenu() {
-		// TODO: Implement the logic to delete a menu item
 		Helper.line(50, "=");
 		System.out.println("DELETE MENU");
 		Helper.line(50, "=");
@@ -267,7 +262,6 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewAllStalls(ArrayList<Stall> stallList) {
-		// TODO Auto-generated method stub
 		Helper.line(50, "=");
 		System.out.println("STALL LIST");
 		Helper.line(50, "=");
