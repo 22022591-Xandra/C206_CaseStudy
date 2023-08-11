@@ -71,9 +71,9 @@ public class C206_CaseStudy {
 					if (option == 1) {
 						C206_CaseStudy.viewMenu();
 					} else if (option == 2) {// ADD ORDER
-						C206_CaseStudy.addOrder();
+						C206_CaseStudy.addOrder(orderList, null);
 					} else if (option == 3) {// ADD FEEDBACK
-						C206_CaseStudy.addFeedback();
+						C206_CaseStudy.addFeedback(feedbackList, null);
 					} else if (option == 4) {// MAKE PAYMENT
 						C206_CaseStudy.makePayment();
 					} else if (option == 5) {
@@ -87,37 +87,37 @@ public class C206_CaseStudy {
 					option = Helper.readInt("Enter an option > ");
 
 					if (option == 1) {
-						C206_CaseStudy.addUser();
+						C206_CaseStudy.addUser(userList,currentUser);
 					} else if (option == 2) {
 						C206_CaseStudy.viewAllUsers(userList);
 					} else if (option == 3) {
 						C206_CaseStudy.deleteUser();
 					} else if (option == 4) {
-						C206_CaseStudy.addStall();
+						C206_CaseStudy.addStall(stallList, null);
 					} else if (option == 5) {
 						C206_CaseStudy.viewAllStalls(stallList);
 					} else if (option == 6) {
 						C206_CaseStudy.deleteStall();
 					} else if (option == 7) {
-						C206_CaseStudy.addMenu();
+						C206_CaseStudy.addMenu(menuList, null);
 					} else if (option == 8) {
 						C206_CaseStudy.viewMenu();
 					} else if (option == 9) {
 						C206_CaseStudy.deleteMenu();
 					} else if (option == 10) {
-						C206_CaseStudy.addOrder();
+						C206_CaseStudy.addOrder(orderList, null);
 					} else if (option == 11) {
 						C206_CaseStudy.viewOrder();
 					} else if (option == 12) {
 						C206_CaseStudy.deleteOrder();
 					} else if (option == 13) {
-						C206_CaseStudy.addQueue();
+						C206_CaseStudy.addQueue(null, null);
 					} else if (option == 14) {
 						C206_CaseStudy.viewQueue();
 					} else if (option == 15) {
 						C206_CaseStudy.deleteQueue();
 					} else if (option == 16) {
-						C206_CaseStudy.addFeedback();
+						C206_CaseStudy.addFeedback(feedbackList, null);
 					} else if (option == 17) {
 						C206_CaseStudy.viewFeedback();
 					} else if (option == 18) {
@@ -224,7 +224,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void addMenu() {
+	public static void addMenu(ArrayList<Menu>menuList, Menu menu) {
 		Helper.line(50, "=");
 		System.out.println("ADD MENU ITEM");
 		Helper.line(50, "=");
@@ -283,7 +283,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void addStall() {
+	public static void addStall(ArrayList<Stall>stallList, Stall stall) {
 		String name = Helper.readString("Enter Stall Name > ");
 		String description = Helper.readString("Enter Description > ");
 		stallList.add(new Stall(name, description));
@@ -326,7 +326,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void addUser() {
+	public static void addUser(ArrayList<User>userList, User user) {
 		Helper.line(50, "=");
 		System.out.println("ADD USER");
 		Helper.line(50, "=");
@@ -379,7 +379,7 @@ public class C206_CaseStudy {
 		userList.add(new User(name, email, pass));
 	}
 
-	public static void addOrder() {
+	public static void addOrder(ArrayList<Order>orderList, Order order) {
 		String userName = currentUser.getName();
 		boolean takeaway = Helper.readBoolean("Is it a takeaway? (true/false) > ");
 
@@ -441,7 +441,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void addFeedback() {
+	public static void addFeedback(ArrayList<Feedback>feedbackList, Feedback fb) {
 		String message = Helper.readString("Enter your feedback message > ");
 		int feedbackId = feedbackList.size() + 1;
 		feedbackList.add(new Feedback(feedbackId, message, currentUser));
@@ -514,7 +514,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void addQueue() {
+	public static void addQueue(ArrayList<Queue>queueList, Queue queue) {
 		String userName = currentUser.getName();
 		boolean takeaway = Helper.readBoolean("Is it a takeaway? (true/false) > ");
 

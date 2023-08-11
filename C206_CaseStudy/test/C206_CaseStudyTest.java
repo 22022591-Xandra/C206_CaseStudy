@@ -32,6 +32,7 @@ public class C206_CaseStudyTest {
 	private ArrayList<Menu> menuList;
 	private ArrayList<Order> orderList;
 	private ArrayList<Feedback> feedbackList;
+	private ArrayList<Queue> queueList;
 
 	public C206_CaseStudyTest() {
 		super();
@@ -39,6 +40,7 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
 		user1 = new User("Customer Test", "c@gmail.com", "1234");
 		user2 = new User("Staff Test", "s@gmail.com", "5678", true);
 
@@ -61,6 +63,13 @@ public class C206_CaseStudyTest {
 
 		fb1 = new Feedback(1, "Hi", userList.get(0));
 		fb2 = new Feedback(2, "Hullo", userList.get(1));
+		
+		userList = new ArrayList<User>();
+		stallList = new ArrayList<Stall>();
+		menuList = new ArrayList<Menu>();
+		orderList = new ArrayList<Order>();
+		feedbackList = new ArrayList<Feedback>();
+		queueList = new ArrayList<Queue>();
 	}
 
 	@Test
@@ -87,7 +96,16 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addUser(userList, user_missing);
 		assertEquals("Test that the User arraylist size is unchange.", 2, userList.size());
 	}
+	
+	public void testViewUser() {
+		
+	}
+	
+	public void testDeleteUser() {
+		
+	}
 
+	@Test
 	public void testAddStall() {
 		assertNotNull("Test if there is valid Stall arraylist to add to", stallList);
 		assertEquals("Test that the Stall arraylist is empty.", 0, stallList.size());
@@ -107,15 +125,50 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the User arraylist size is unchange.", 2, stallList.size());
 
 		// Add an item that has missing detail
-		User stall_missing = new Stall("Kim's Ricecake","");
+		Stall stall_missing = new Stall("Kim's Ricecake","");
 		C206_CaseStudy.addStall(stallList, stall_missing);
 		assertEquals("Test that the Stall arraylist size is unchange.", 2, stallList.size());
 	}
-
+	
+	public void testViewStall() {
+		
+	}
+	
+	public void testDeleteStall() {
+		
+	}
+	
 	@Test
-	public void c206_test() {
-		// fail("Not yet implemented");
-		assertTrue("C206_CaseStudy_SampleTest ", true);
+	public void testAddMenu() {
+		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+		assertEquals("Test that the Menu arraylist is empty.", 0, menuList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addMenu(menuList, menu1);
+		assertEquals("Test that the Stall arraylist size is 1.", 1, menuList.size());
+
+		// Add an item
+		C206_CaseStudy.addMenu(menuList, menu2);
+		assertEquals("Test that the User arraylist size is now 2.", 2, menuList.size());
+
+		// The item just added is as same as the last item in the list
+		assertSame("Test that User is added to the end of the list.", user2, menuList.get(1));
+
+		// Add an item that already exists in the list
+		C206_CaseStudy.addMenu(menuList, menu2);
+		assertEquals("Test that the User arraylist size is unchange.", 2, menuList.size());
+
+		// Add an item that has missing detail
+		Menu menu_missing = new Menu("Ricecake",5.00 ,"");
+		C206_CaseStudy.addMenu(menuList, menu_missing);
+		assertEquals("Test that the Menu arraylist size is unchange.", 2, menuList.size());
+	}
+	
+	public void testViewMenu() {
+		
+	}
+	
+	public void testDeleteMenu() {
+		
 	}
 
 	@After
