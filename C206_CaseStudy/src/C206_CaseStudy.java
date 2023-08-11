@@ -11,7 +11,7 @@ public class C206_CaseStudy {
 	public static ArrayList<Order> orderList = new ArrayList<Order>();
 	public static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
-	public static void main(String[] args) {  
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		stallList.add(new Stall("XY's Burgs and Fries", "Western Cuisine"));
@@ -82,7 +82,7 @@ public class C206_CaseStudy {
 				}
 				// STAFF VIEW
 			} else if (currentUser != null && currentUser.getEmp() == true) {
-				while (option != 14) {
+				while (option != 20) {
 					C206_CaseStudy.menuStaff();
 					option = Helper.readInt("Enter an option > ");
 
@@ -105,16 +105,24 @@ public class C206_CaseStudy {
 					} else if (option == 9) {
 						C206_CaseStudy.deleteMenu();
 					} else if (option == 10) {
-						C206_CaseStudy.viewOrder();
+						C206_CaseStudy.addOrder();
 					} else if (option == 11) {
-						C206_CaseStudy.deleteOrder();
+						C206_CaseStudy.viewOrder();
 					} else if (option == 12) {
-						C206_CaseStudy.viewQueue();
+						C206_CaseStudy.deleteOrder();
 					} else if (option == 13) {
-						C206_CaseStudy.viewFeedback();
+						C206_CaseStudy.addQueue();
 					} else if (option == 14) {
-						C206_CaseStudy.deleteFeedback();
+						C206_CaseStudy.viewQueue();
 					} else if (option == 15) {
+						C206_CaseStudy.deleteQueue();
+					} else if (option == 16) {
+						C206_CaseStudy.addFeedback();
+					} else if (option == 17) {
+						C206_CaseStudy.viewFeedback();
+					} else if (option == 18) {
+						C206_CaseStudy.deleteFeedback();
+					} else if (option == 19) {
 						isLoggedIn = false;
 					}
 				}
@@ -158,13 +166,17 @@ public class C206_CaseStudy {
 		System.out.println("7 -  Add Menu");
 		System.out.println("8 -  View Menu");
 		System.out.println("9 -  Delete Menu");
-		System.out.println("10 - View Order");
-		System.out.println("11 - Delete Order");
-		System.out.println("12 - View Queue");
-		System.out.println("13 - View Feedback");
-		System.out.println("14 - Delete Feedback");
-		System.out.println("15 - Log Out");
-		System.out.println("16 - Quit");
+		System.out.println("10 - Add Order");
+		System.out.println("11 - View Order");
+		System.out.println("12 - Delete Order");
+		System.out.println("13 - Add Queue");
+		System.out.println("14 - View Queue");
+		System.out.println("15 - Delete Queue");
+		System.out.println("16 - Add Feedback");
+		System.out.println("17 - View Feedback");
+		System.out.println("18 - Delete Feedback");
+		System.out.println("19 - Log Out");
+		System.out.println("20 - Quit");
 	}
 
 	public static void makePayment() {
@@ -220,12 +232,11 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 		System.out.println("ADD MENU ITEM");
 		Helper.line(50, "=");
-		
-		
-		String stall  = Helper.readString("Enter the stall name you want to add menu to > ");
+
+		String stall = Helper.readString("Enter the stall name you want to add menu to > ");
 		String itemname = Helper.readString("Enter menu item >");
 		Double price = Helper.readDouble("Enter price of food > ");
-		
+
 		menuList.add(new Menu(itemname, price, stall));
 		System.out.println("Added successfully!");
 
@@ -236,7 +247,7 @@ public class C206_CaseStudy {
 		Helper.line(50, "=");
 		System.out.println("DELETE MENU");
 		Helper.line(50, "=");
-		
+
 		if (menuList.isEmpty()) {
 			System.out.println("No menu item available to delete.");
 		} else {
@@ -252,8 +263,7 @@ public class C206_CaseStudy {
 				System.out.println("Invalid menu index!");
 			}
 		}
-		
-		
+
 	}
 
 	public static void viewAllStalls(ArrayList<Stall> stallList) {
@@ -495,6 +505,48 @@ public class C206_CaseStudy {
 				System.out.println("Status: " + orderList.get(i).getStatus());
 				System.out.println("Takeaway: " + (orderList.get(i).isTakeaway() ? "Yes" : "No"));
 				System.out.println("=============================");
+			}
+		}
+	}
+
+	public static void addQueue() {
+		String userName = currentUser.getName();
+		boolean takeaway = Helper.readBoolean("Is it a takeaway? (true/false) > ");
+
+		System.out.println("Available Menu Items:");
+		for (int i = 0; i < menuList.size(); i++) {
+			System.out.println((i + 1) + ". " + menuList.get(i).getItemname() + " - $" + menuList.get(i).getPrice());
+		}
+
+		int menuChoice = Helper.readInt("Enter the number of the menu item > ");
+
+		if (menuChoice >= 1 && menuChoice <= menuList.size()) {
+			Menu selectedMenu = menuList.get(menuChoice - 1);
+			orderList.add(new Order(userName, "PENDING", takeaway, selectedMenu));
+			System.out.println("Order added successfully!");
+		} else {
+			System.out.println("Invalid menu choice!");
+		}
+	}
+
+	public static void deleteQueue() {
+		Helper.line(50, "=");
+		System.out.println("DELETE QUEUE");
+		Helper.line(50, "=");
+
+		if (orderList.isEmpty()) {
+			System.out.println("No queue available to delete.");
+		} else {
+			viewQueue();
+
+			int orderIndex = Helper.readInt("Enter the number of the queue to delete > ");
+			orderIndex--;
+
+			if (orderIndex >= 0 && orderIndex < orderList.size()) {
+				orderList.remove(orderIndex);
+				System.out.println("Queue deleted successfully!");
+			} else {
+				System.out.println("Invalid order index!");
 			}
 		}
 	}
