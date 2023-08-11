@@ -16,6 +16,7 @@ public class C206_CaseStudy {
 
 		userList.add(new User("Customer Test", "c@gmail.com", "1234"));
 		userList.add(new User("Staff Test", "s@gmail.com", "5678", true));
+		userList.add(new User("User Test", "u@gmail.com", "9876"));
 		
 		stallList.add(new Stall("XY's Burgs and Fries", "Western Cuisine"));
 		stallList.add(new Stall("Kim's Ricecake", "Korean Cuisine"));
@@ -312,7 +313,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void viewAllUsers(ArrayList<User> userList) {
+	public static String viewAllUsers(ArrayList<User> userList) {
 		Helper.line(50, "=");
 		System.out.println("USER LIST");
 		Helper.line(50, "=");

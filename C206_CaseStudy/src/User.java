@@ -51,4 +51,13 @@ public class User{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public void setIsAvailable(boolean a) {
+		
+	}
+
+	public boolean getIsAvailable() {
+	
+		return false;
+	}
 }
