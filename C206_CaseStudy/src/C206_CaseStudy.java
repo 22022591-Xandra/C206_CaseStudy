@@ -12,7 +12,6 @@ public class C206_CaseStudy {
 	public static ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 	public static void main(String[] args) {  
-		
 		// TODO Auto-generated method stub
 
 		stallList.add(new Stall("XY's Burgs and Fries", "Western Cuisine"));
