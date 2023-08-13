@@ -15,26 +15,37 @@
  */
 
 public class Queue {
-  private String userName;
-  private String itemname;
-  private int qNumber;
-  
-  
-  public Queue(String userName, String itemname, int qNumber) {
-    this.userName = userName;
-    this.itemname = itemname;
-    this.qNumber = qNumber;
-  }
-  public String getUserName() {
-    return userName;
-  }
-  public String getItemname() {
-    return itemname;
-  }
-  public int getQNumber() {
-    return qNumber;
-  }
-  public void setQNumber(int newQNumber) {
-    qNumber = newQNumber;
-  }
-}
+	private String userName;
+	private String name;
+	private String itemname;
+	private String status;
+	private boolean takeaway;
+
+
+	public Queue(String userName, String name, String itemname, String status, boolean takeaway) {
+	  this.userName = userName;
+	  this.name = name;
+	  this.itemname = itemname;
+	  this.status = status;
+	  this.takeaway = takeaway;
+	  
+	}
+	public String getUserName() {
+	  return userName;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getItemname() {
+	  return itemname;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public boolean isTakeaway() {
+		return takeaway;
+	}
+	}
