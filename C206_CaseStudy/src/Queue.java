@@ -48,4 +48,4 @@ public class Queue {
 	public boolean isTakeaway() {
 		return takeaway;
 	}
-	}
+}
