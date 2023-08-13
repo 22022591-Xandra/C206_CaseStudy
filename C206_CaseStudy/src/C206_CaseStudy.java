@@ -1,4 +1,7 @@
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.regex.Pattern;
 
 public class C206_CaseStudy {
 
@@ -47,7 +50,7 @@ public class C206_CaseStudy {
 
 			// VIEW MENU
 			if (option == 1) {
-				C206_CaseStudy.viewMenu();
+				C206_CaseStudy.viewMenu(menuList);
 				// LOGIN AS CUSTOMER/STALL OWNER
 			} else if (option == 2) {
 				String email = Helper.readString("Enter Email > ");
@@ -70,7 +73,7 @@ public class C206_CaseStudy {
 
 					// VIEW MENU
 					if (option == 1) {
-						C206_CaseStudy.viewMenu();
+						C206_CaseStudy.viewMenu(menuList);
 					} else if (option == 2) {// ADD ORDER
 						C206_CaseStudy.addOrder(orderList, null);
 					} else if (option == 3) {// ADD FEEDBACK
@@ -102,13 +105,13 @@ public class C206_CaseStudy {
 					} else if (option == 7) {
 						C206_CaseStudy.addMenu(menuList, null);
 					} else if (option == 8) {
-						C206_CaseStudy.viewMenu();
+						C206_CaseStudy.viewMenu(menuList);
 					} else if (option == 9) {
 						C206_CaseStudy.deleteMenu();
 					} else if (option == 10) {
 						C206_CaseStudy.addOrder(orderList, null);
 					} else if (option == 11) {
-						C206_CaseStudy.viewOrder();
+						C206_CaseStudy.viewOrder(orderList);
 					} else if (option == 12) {
 						C206_CaseStudy.deleteOrder();
 					} else if (option == 13) {
@@ -185,7 +188,7 @@ public class C206_CaseStudy {
 		if (orderList.isEmpty()) {
 			System.out.println("No orders available for payment.");
 		} else {
-			viewOrder();
+			viewOrder(orderList);
 
 			int orderIndex = Helper.readInt("Enter the number of the order to make payment for > ");
 			orderIndex--;
@@ -205,7 +208,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void viewMenu() {
+	public static String viewMenu(ArrayList<Menu>menuList) {
 		Helper.line(50, "=");
 		System.out.println("MENU");
 		Helper.line(50, "=");
@@ -222,7 +225,7 @@ public class C206_CaseStudy {
 			}
 			output += "\n";
 		}
-		System.out.println(output);
+		return output;
 	}
 
 	public static void addMenu(ArrayList<Menu>menuList, Menu menu) {
@@ -256,7 +259,7 @@ public class C206_CaseStudy {
 		if (menuList.isEmpty()) {
 			System.out.println("No menu item available to delete.");
 		} else {
-			viewMenu();
+			viewMenu(menuList);
 
 			int menuIndex = Helper.readInt("Enter the number of the menus to delete > ");
 			menuIndex--;
@@ -271,7 +274,7 @@ public class C206_CaseStudy {
 
 	}
 
-	public static void viewAllStalls(ArrayList<Stall> stallList) {
+	public static String viewAllStalls(ArrayList<Stall> stallList) {
 		Helper.line(50, "=");
 		System.out.println("STALL LIST");
 		Helper.line(50, "=");
@@ -281,7 +284,7 @@ public class C206_CaseStudy {
 		for (int i = 0; i < stallList.size(); i++) {
 			output += String.format("%-20s %29s\n", stallList.get(i).getName(), stallList.get(i).getDescription());
 		}
-		System.out.println(output);
+		return output;
 	}
 
 	public static void addStall(ArrayList<Stall>stallList, Stall stall) {
@@ -324,7 +327,7 @@ public class C206_CaseStudy {
 			output += String.format("%-6d %-15s %-28s\n", (i + 1), userList.get(i).getName(),
 					userList.get(i).getEmail());
 		}
-		System.out.println(output);
+		return output;
 	}
 
 	public static void addUser(ArrayList<User>userList, User user) {
@@ -400,7 +403,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void viewOrder() {
+	public static void viewOrder(ArrayList<Order>orderList) {
 		Helper.line(50, "=");
 		System.out.println("VIEW ORDERS");
 		Helper.line(50, "=");
@@ -428,7 +431,7 @@ public class C206_CaseStudy {
 		if (orderList.isEmpty()) {
 			System.out.println("No orders available to delete.");
 		} else {
-			viewOrder(); // Display available orders first
+			viewOrder(orderList); // Display available orders first
 
 			int orderIndex = Helper.readInt("Enter the number of the order to delete > ");
 			orderIndex--;

@@ -97,8 +97,37 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the User arraylist size is unchange.", 2, userList.size());
 	}
 	
+	@Test
 	public void testViewUser() {
+		//Test if userList is not null and empty
+		assertNotNull("Test if there is valid User arraylist to add to", userList);
+		assertEquals("Test that the User arraylist is empty.", 0, userList.size());
+		//Attempt to retrieve the users
+		String allUser = C206_CaseStudy.viewAllUsers(userList);
+		String testOutput = "";
+		//Test if the output is empty
+		assertEquals("Test that nothing is displayed", testOutput, allUser);
 		
+		C206_CaseStudy.addUser(userList, user1);
+		C206_CaseStudy.addUser(userList, user2);
+		//Test that the list is not empty
+		assertEquals("Test that User arraylist size is 2.", 2, userList.size());
+		//Attempt to retrieve the users
+		allUser = C206_CaseStudy.viewAllUsers(userList);
+		testOutput = String.format("%-6d %-15s %-28s\n", "Customer Test", "c@gmail.com", "1234", null);
+		testOutput += String.format("%-6d %-15s %-28s\n", "Staff Test", "s@gmail.com", "5678", true);
+		//Test that the details are displayed correctly
+		assertEquals("Test that the display is correct.", testOutput, allUser);
+		
+		user2.setIsAvailable(false);
+		C206_CaseStudy.addUser(userList, user2);
+		assertEquals("Test that User arrayList size is 1.", 2, userList.size());
+		assertFalse("Test that the last item in the arraylist is not available", userList.get(0).getIsAvailable());
+		//Attempt to retrieve the users
+		allUser = C206_CaseStudy.viewAllUsers(userList);
+		testOutput = String.format("%-6d %-15s %-28s\n", "Customer Test", "c@gmail.com", "1234", null);
+		//Test that the details are displayed correctly
+		assertEquals("Test that the diplay is correct.", testOutput, allUser);
 	}
 	
 	public void testDeleteUser() {
@@ -130,8 +159,38 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the Stall arraylist size is unchange.", 2, stallList.size());
 	}
 	
+	@Test
 	public void testViewStall() {
+		//Test if stallList is not null and empty
+		assertNotNull("Test if there is valid Stall arraylist to add to", stallList);
+		assertEquals("Test that the Stall arraylist is empty.", 0, stallList.size());
+		//Attempt to retrieve the users
+		String allStall = C206_CaseStudy.viewAllStalls(stallList);
+		String testOutput = "";
+		//Test if the output is empty
+		assertEquals("Test that nothing is displayed", testOutput, allStall);
 		
+		C206_CaseStudy.addStall(stallList, stall1);
+		C206_CaseStudy.addStall(stallList, stall2);
+		//Test that the list is not empty
+		assertEquals("Test that Stall arraylist size is 2.", 2, stallList.size());
+		//Attempt to retrieve the users
+		allStall = C206_CaseStudy.viewAllStalls(stallList);
+		testOutput = String.format("%-20s %29s\n", "XY's Burgs and Fries", "Western Cuisine");
+		testOutput += String.format("%-20s %29s\n", "Kim's Ricecake", "Korean Cuisine");
+		//Test that the details are displayed correctly
+		assertEquals("Test that the display is correct.", testOutput, allStall);
+		
+		stall3.setIsAvailable(false);
+		C206_CaseStudy.addStall(stallList, stall3);
+		assertEquals("Test that Stall arrayList size is 2.", 3, stallList.size());
+		assertFalse("Test that the last item in the arraylist is not available", stallList.get(2).getIsAvailable());
+		//Attempt to retrieve the users
+		allStall = C206_CaseStudy.viewAllStalls(stallList);
+		testOutput = String.format("%-20s %29s\n", "XY's Burgs and Fries", "Western Cuisine");
+		testOutput += String.format("%-20s %29s\n", "Kim's Ricecake", "Korean Cuisine");
+		//Test that the details are displayed correctly
+		assertEquals("Test that the diplay is correct.", testOutput, allStall);
 	}
 	
 	public void testDeleteStall() {
@@ -163,11 +222,75 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the Menu arraylist size is unchange.", 2, menuList.size());
 	}
 	
+	@Test
 	public void testViewMenu() {
+		//Test if menuList is not null and empty
+		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
+		assertEquals("Test that the Menu arraylist is empty.", 0, menuList.size());
+		//Attempt to retrieve the users
+		String allMenu = C206_CaseStudy.viewMenu(menuList);
+		String testOutput = "";
+		//Test if the output is empty
+		assertEquals("Test that nothing is displayed", testOutput, allMenu);
 		
+		C206_CaseStudy.addMenu(menuList, menu1);
+		C206_CaseStudy.addMenu(menuList, menu2);
+		//Test that the list is not empty
+		assertEquals("Test that Menu arraylist size is 2.", 2, menuList.size());
+		//Attempt to retrieve the users
+		allMenu = C206_CaseStudy.viewAllStalls(stallList);
+		testOutput = String.format("%s - %.2f\n", "Burger", 5.00, "XY's Burgs and Fries");
+		testOutput += String.format("%s - %.2f\n", "Fries", 5.00, "XY's Burgs and Fries");
+		//Test that the details are displayed correctly
+		assertEquals("Test that the display is correct.", testOutput, allMenu);
+		
+		stall3.setIsAvailable(false);
+		C206_CaseStudy.addMenu(menuList, menu3);
+		assertEquals("Test that Menu arrayList size is 2.", 3, menuList.size());
+		assertFalse("Test that the last item in the arraylist is not available", menuList.get(2).getIsAvailable());
+		//Attempt to retrieve the users
+		allMenu = C206_CaseStudy.viewMenu(menuList);
+		testOutput = String.format("%s - %.2f\n", "Burger", 5.00, "XY's Burgs and Fries");
+		testOutput += String.format("%s - %.2f\n", "Fries", 5.00, "XY's Burgs and Fries");
+		//Test that the details are displayed correctly
+		assertEquals("Test that the diplay is correct.", testOutput, allMenu);
 	}
 	
 	public void testDeleteMenu() {
+		
+	}
+	
+	@Test
+	public void testAddOrder() {
+		assertNotNull("Test if there is valid Order arraylist to add to", orderList);
+		assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addOrder(orderList, order1);
+		assertEquals("Test that the Order arraylist size is 1.", 1, orderList.size());
+
+		// Add an item
+		C206_CaseStudy.addOrder(orderList, order2);
+		assertEquals("Test that the User arraylist size is now 2.", 2, orderList.size());
+
+		// The item just added is as same as the last item in the list
+		assertSame("Test that User is added to the end of the list.", user2, orderList.get(1));
+
+		// Add an item that already exists in the list
+		C206_CaseStudy.addOrder(orderList, order2);
+		assertEquals("Test that the User arraylist size is unchange.", 2, orderList.size());
+
+		// Add an item that has missing detail
+		Order order_missing = new Order("Customer Test", "READY", false, menuList.get(0));
+		C206_CaseStudy.addOrder(orderList, order_missing);
+		assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
+	}
+	
+	@Test
+	public void testViewOrder() {
+		
+	}
+	
+	public void testDeleteOrder() {
 		
 	}
 
@@ -197,3 +320,4 @@ public class C206_CaseStudyTest {
 	}
 
 }
+

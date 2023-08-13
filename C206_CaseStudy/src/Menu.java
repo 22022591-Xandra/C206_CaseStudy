@@ -32,5 +32,12 @@ public class Menu {
 	public String getStall() {
 		return stall;
 	}
+	public void setIsAvailable(boolean a) {
+		
+	}
+	public boolean getIsAvailable() {
+	
+		return false;
+	}
 	
 }

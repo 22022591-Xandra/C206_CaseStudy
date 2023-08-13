@@ -1,3 +1,16 @@
+/**
+ * I declare that this code was written by me.
+ * I will not copy or allow others to copy my code.
+ * I understand that copying code is considered as plagiarism.
+ *
+ * 22006545, 9 Aug 2023 7:51:44 pm
+ */
+
+/**
+ * @author 22006545
+ *
+ */
+
 import java.util.ArrayList;
 
 public class Stall {
@@ -20,4 +33,12 @@ public class Stall {
 	public String toString() {
 		return "Stall Name: " + name + "\nDescription: " + description;
 	}
+	public void setIsAvailable(boolean a) {
+		
+	}
+	public boolean getIsAvailable() {
+	
+		return false;
+	}
 }
+
