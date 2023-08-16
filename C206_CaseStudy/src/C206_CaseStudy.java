@@ -112,11 +112,11 @@ public class C206_CaseStudy {
 					} else if (option == 12) {
 						C206_CaseStudy.deleteOrder();
 					} else if (option == 13) {
-						C206_CaseStudy.addQueue(null, null);
+						C206_CaseStudy.addQueue(null, null, option);
 					} else if (option == 14) {
-						C206_CaseStudy.viewQueue();
+						C206_CaseStudy.viewQueue(orderList);
 					} else if (option == 15) {
-						C206_CaseStudy.deleteQueue();
+						C206_CaseStudy.deleteQueue(orderList, option);
 					} else if (option == 16) {
 						C206_CaseStudy.addFeedback(feedbackList, null);
 					} else if (option == 17) {
@@ -496,7 +496,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void viewQueue() {
+	public static void viewQueue(ArrayList<Order> orderList2) {
 		Helper.line(50, "=");
 		System.out.println("VIEW QUEUE");
 		Helper.line(50, "=");
@@ -516,7 +516,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void addQueue(ArrayList<Queue>queueList, Queue queue) {
+	public static void addQueue(ArrayList<Order> orderList2, ArrayList<Menu> menuList2, int j) {
 		String userName = currentUser.getName();
 		boolean takeaway = Helper.readBoolean("Is it a takeaway? (true/false) > ");
 
@@ -536,7 +536,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void deleteQueue() {
+	public static void deleteQueue(ArrayList<Order> orderList2, int i) {
 		Helper.line(50, "=");
 		System.out.println("DELETE QUEUE");
 		Helper.line(50, "=");
@@ -544,7 +544,7 @@ public class C206_CaseStudy {
 		if (orderList.isEmpty()) {
 			System.out.println("No queue available to delete.");
 		} else {
-			viewQueue();
+			viewQueue(orderList2);
 
 			int orderIndex = Helper.readInt("Enter the number of the queue to delete > ");
 			orderIndex--;

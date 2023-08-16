@@ -1,10 +1,17 @@
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import mm.C206_CaseStudy;
+import mm.Menu;
+import mm.Order;
+import mm.User;
 
 public class C206_CaseStudyTest {
 	// test data
@@ -300,6 +307,114 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testDeleteOrder() {
 
+	}
+	
+	@Test
+	public void testAddQueue() {
+		// menu chosen in queue is valid
+		ArrayList<Menu> menuList = new ArrayList<Menu>();
+		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
+		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
+		
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		
+		C206_CaseStudy.addQueue(orderList, menuList, 1);
+		
+		assertEquals("Check if orderList size is 1 after adding order", 1, orderList.size());
+		assertEquals("Check if order user is correct", "Customer Test", orderList.get(0).getUserName());
+		assertEquals("Check if order stall is correct", "XY's Burgs and Fries", orderList.get(0).getItem().getStall());
+		assertEquals("Check if otder item is correct", "Burger", orderList.get(0).getItem().getItemname());
+		assertEquals("Check if order status is PENDING", "PENDING", orderList.get(0).getStatus());
+		assertEquals("Check if order takeaway status is true", true, orderList.get(0).isTakeaway());
+		
+		// menu chosen in queue is invalid
+		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
+		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
+		
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		
+		C206_CaseStudy.addQueue(orderList, menuList, 3);
+		
+		assertEquals("Check if orderList size is 0 after invalid menu choice", 0, menuList.size());
+		
+		// menuList is empty
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		
+		C206_CaseStudy.addQueue(orderList, menuList, 1);
+		
+		assertEquals("Check if orderList size is 0 after adding with empty menuList", 0, orderList.size());
+	}
+	
+	@Test
+	public void testViewQueue() {
+		// displaying correct information of orders in the queue
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		orderList.add(new Order("Customer Test", "READY", false, menuList.get(0)));
+		orderList.add(new Order("Customer Test2", "PENDING", true, menuList.get(1)));
+		
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		
+		C206_CaseStudy.viewQueue(orderList);
+		
+		String expectedOutput = "VIEW QUEUE\n" +
+                                "==================\n" +
+                                "QUEUE: 1\n" +
+                                "User: Customer Test\n" +
+                                "Stall: XY's Burgs and Fries\n" +
+                                "Item: Burger\n" +
+                                "Status: PENDING\n" +
+                                "Takeaway: Yes\n" +
+                                "==================\n" +
+                                "QUEUE: 2\n" +
+                                "User: Customer Test\n" +
+                                "Stall: XY's Burgs and Fries\n" +
+                                "Item: Fries\n" +
+                                "Status: PENDING\n" +
+                                "Takeaway: No\n" +
+                                "==================\n";
+		
+		assertEquals("Check if the output matches the expected output", expectedOutput, outContent.toString());
+		
+		// displaying the correct message when there are no orders in the queue
+		C206_CaseStudy.viewQueue(orderList);
+		String expectedOutput1 = "VIEW QUEUE\n" +
+								"==================\n" +
+								"No orders available.\n";
+		
+		assertEquals("Check if the output matches the expected output", expectedOutput1, outContent.toString());
+		
+		// method handles a null
+		C206_CaseStudy.viewQueue(null);
+
+		String expectedOutput2 = "VIEW QUEUE\n" +
+				"==================\n" +
+				"No orders available.\n";
+
+		assertEquals("Check if the output matches the expected output", expectedOutput2, outContent.toString());
+	}
+	
+	@Test
+	public void testDeleteQueue() {
+		// deleting a valid order from orderList successfully
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		orderList.add(new Order("Customer Test", "PENDING", true, new Menu("Burger", 5.00, "XY's Burgs and Fries")));
+		
+		C206_CaseStudy.deleteQueue(orderList, 1);
+		
+		assertEquals("Check if orderList size is 0 after deleting order", 0, orderList.size());
+		
+		// deleting an invalid order
+		C206_CaseStudy.deleteQueue(orderList, 2);
+		
+		assertEquals("Check if orderList remains unchanged after deleting with invalid order", 1, orderList.size());
+
+		// deleting an order from an empty orderList
+		ArrayList<Order> emptyOrderList = new ArrayList<Order>();
+		
+		C206_CaseStudy.deleteQueue(emptyOrderList, 1);
+		
+		assertEquals("Check if orderList size is 0 after attempting to delete from empty list", 0, emptyOrderList.size());		
 	}
 
 	@After
