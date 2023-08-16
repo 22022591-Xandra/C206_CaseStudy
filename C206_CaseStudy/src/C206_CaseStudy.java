@@ -400,7 +400,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void viewOrder(ArrayList<Order>orderList) {
+	public static String viewOrder(ArrayList<Order>orderList) {
 		Helper.line(50, "=");
 		System.out.println("VIEW ORDERS");
 		Helper.line(50, "=");
@@ -418,6 +418,7 @@ public class C206_CaseStudy {
 				System.out.println("=============================");
 			}
 		}
+		return null;
 	}
 
 	public static void deleteOrder() {

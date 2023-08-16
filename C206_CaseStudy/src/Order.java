@@ -43,4 +43,28 @@ public class Order {
 	public Menu getItem() {
 		return item;
 	}
+
+	/**
+	 * @param b
+	 */
+	public void setCompleted(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * @return
+	 */
+	public Object isCompleted() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	public Object getOrderID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
