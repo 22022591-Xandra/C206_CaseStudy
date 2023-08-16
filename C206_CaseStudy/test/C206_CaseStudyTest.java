@@ -240,8 +240,6 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
 		assertEquals("Test that the Menu arraylist is empty.", 0, menuList.size());
 		// Attempt to retrieve the users
-		String allMenu = C206_CaseStudy.viewMenu(menuList);
-		String testOutput = "";
 		// Test if the output is empty
 		assertEquals("Test that nothing is displayed", testOutput, allMenu);
 
