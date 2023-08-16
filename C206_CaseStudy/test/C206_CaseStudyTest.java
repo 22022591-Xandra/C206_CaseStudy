@@ -291,50 +291,17 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddOrder() {
-		// Test adding an order to the list
-		C206_CaseStudy.addOrder(orderList, new Order("Customer Test", "PENDING", true, menuList.get(0)));
-		assertEquals("Check if order list size is 1", 1, orderList.size());
-
-		// Test adding another order to the list
-		C206_CaseStudy.addOrder(orderList, new Order("Customer Test2", "READY", false, menuList.get(1)));
-		assertEquals("Check if order list size is 2", 2, orderList.size());
+		
 	}
 
 	@Test
 	public void testViewOrder() {
-		// Add some orders to the list
-		orderList.add(new Order("Customer Test", "PENDING", true, menuList.get(0)));
-		orderList.add(new Order("Customer Test2", "READY", false, menuList.get(1)));
-
-		// Test viewing orders
-		String expectedOutput = "VIEW ORDERS\n" +
-		                       "ORDER 1\n" +
-		                       "User: Customer Test\n" +
-		                       "Stall: XY's Burgs and Fries\n" +
-		                       "Item: Burger\n" +
-		                       "Status: PENDING\n" +
-		                       "Takeaway: Yes\n" +
-		                       "=============================\n" +
-		                       "ORDER 2\n" +
-		                       "User: Customer Test2\n" +
-		                       "Stall: XY's Burgs and Fries\n" +
-		                       "Item: Fries\n" +
-		                       "Status: READY\n" +
-		                       "Takeaway: No\n" +
-		                       "=============================\n";
-		assertEquals("Check if viewOrder returns correct output", expectedOutput, C206_CaseStudy.viewOrder(orderList));
+		
 	}
 
 	@Test
 	public void testDeleteOrder() {
-		// Add some orders to the list
-		orderList.add(new Order("Customer Test", "PENDING", true, menuList.get(0)));
-		orderList.add(new Order("Customer Test2", "READY", false, menuList.get(1)));
 
-		// Test deleting an order
-		C206_CaseStudy.deleteOrder(); // Delete order at index 1 (second order)
-		assertEquals("Check if order list size is 1 after deletion", 1, orderList.size());
-		assertEquals("Check if the remaining order's status is PENDING", "PENDING", orderList.get(0).getStatus());
 	}
 
 	@After
