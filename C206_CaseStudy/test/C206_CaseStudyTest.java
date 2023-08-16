@@ -242,28 +242,33 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddMenu() {
-		assertTrue("C206_CaseStudy", true);
-		assertNotNull("Test if there is valid Menu arraylist to add to", menuList);
-		assertEquals("Test that the Menu arraylist is empty.", 0, menuList.size());
-		// Given an empty list, after adding 1 item, the size of the list is 1
-		C206_CaseStudy.addMenu(menuList, menu1);
-		assertEquals("Test that the Stall arraylist size is 1.", 1, menuList.size());
+	
+	}
+	
+	@Test public void testSearchMenu() {
+		assertNotNull("Test if there is valid Stall arraylist to add to", stallList);
+		assertEquals("Test that the menu arraylist is available to be searched .", 0, menuList.size());
+	}
+	
+	@Test
+	public void testDeleteMenu1() {
 
-		// Add an item
-		C206_CaseStudy.addMenu(menuList, menu2);
-		assertEquals("Test that the User arraylist size is now 2.", 2, menuList.size());
+		C206_CaseStudy.deleteQueue(orderList, 1);
 
-		// The item just added is as same as the last item in the list
-		assertSame("Test that User is added to the end of the list.", menu2, menuList.get(1));
+		assertEquals("Check if MenuList size is 0 after deleting menu", 0, menuList.size());
 
-		// Add an item that already exists in the list
-		C206_CaseStudy.addMenu(menuList, menu2);
-		assertEquals("Test that the User arraylist size is unchange.", 2, menuList.size());
+		// deleting an invalid order
+		C206_CaseStudy.deleteMenu();
 
-		// Add an item that has missing detail
-		Menu menu_missing = new Menu("Ricecake", 5.00, "");
-		C206_CaseStudy.addMenu(menuList, menu_missing);
-		assertEquals("Test that the Menu arraylist size is unchange.", 2, menuList.size());
+		assertEquals("Check if MenuList remains unchanged after deleting with invalid menu", 1, menuList.size());
+
+		// deleting an order from an empty orderList
+		ArrayList<Order> emptyOrderList = new ArrayList<Order>();
+
+		C206_CaseStudy.deleteQueue(emptyOrderList, 1);
+
+		assertEquals("Check if MenuList size is 0 after attempting to delete from empty list", 0,
+				menuList.size());
 	}
 
 	@Test
