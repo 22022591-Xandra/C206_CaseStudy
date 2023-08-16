@@ -8,8 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class C206_CaseStudyTest {
 	// test data
 	private User user1;
@@ -144,9 +142,26 @@ public class C206_CaseStudyTest {
 	}
 
 	public void testDeleteUser() {
-		
+		int initialSize = userList.size();
+		// Delete an user
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		C206_CaseStudy.deleteUser();
+		assertEquals(initialSize - 1, userList.size());
 
+		// Try to delete from an empty list
+		userList.clear();
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		C206_CaseStudy.deleteUser();
+		assertEquals(0, userList.size());
+
+		// Try to delete using invalid index
+		userList.add(new User("Customer Test", "c@gmail.com", "0897", false));
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		C206_CaseStudy.deleteUser();
+		assertEquals(0, userList.size());
 	}
+
+
 
 	@Test
 	public void testAddStall() {
@@ -211,20 +226,18 @@ public class C206_CaseStudyTest {
 
 	public void testDeleteStall() {
 		int initialSize = stallList.size();
-        // delete a stall in the list
-        C206_CaseStudy.deleteStall();
-        assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
-        
-        // delete stall with last index
-        C206_CaseStudy.deleteStall();
-        assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
-        
-        //delete stall with invalid index
-        C206_CaseStudy.deleteStall(); // Index out of bounds
-        assertEquals("Stall list size should remain the same", initialSize, stallList.size());
-    }
-        
+		// delete a stall in the list
+		C206_CaseStudy.deleteStall();
+		assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
 
+		// delete stall with last index
+		C206_CaseStudy.deleteStall();
+		assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
+
+		// delete stall with invalid index
+		C206_CaseStudy.deleteStall(); // Index out of bounds
+		assertEquals("Stall list size should remain the same", initialSize, stallList.size());
+	}
 
 	@Test
 	public void testAddMenu() {
@@ -306,251 +319,234 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	  public void testAddOrder() {
-	    assertTrue("C206_CaseStudy", true);
-	    assertNotNull("Test if there is valid Order arraylist to add to", orderList);
-	    assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
-	    // Given an empty list, after adding 1 item, the size of the list is 1
-	    C206_CaseStudy.addOrder(orderList, order1);
-	    assertEquals("Test that the Order arraylist size is 1.", 1, orderList.size());
+	public void testAddOrder() {
+		assertTrue("C206_CaseStudy", true);
+		assertNotNull("Test if there is valid Order arraylist to add to", orderList);
+		assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addOrder(orderList, order1);
+		assertEquals("Test that the Order arraylist size is 1.", 1, orderList.size());
 
-	    // Add an item
-	    C206_CaseStudy.addOrder(orderList, order2);
-	    assertEquals("Test that the Order arraylist size is now 2.", 2, orderList.size());
+		// Add an item
+		C206_CaseStudy.addOrder(orderList, order2);
+		assertEquals("Test that the Order arraylist size is now 2.", 2, orderList.size());
 
-	    // The item just added is as same as the last item in the list
-	    assertSame("Test that Order is added to the end of the list.", order2, orderList.get(1));
+		// The item just added is as same as the last item in the list
+		assertSame("Test that Order is added to the end of the list.", order2, orderList.get(1));
 
-	    // Add an item that already exists in the list
-	    C206_CaseStudy.addOrder(orderList, order2);
-	    assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
+		// Add an item that already exists in the list
+		C206_CaseStudy.addOrder(orderList, order2);
+		assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
 
-	    // Add an item that has missing detail
-	    Order order_missing = new Order("Customer Test", "PENDING", true, null);
-	    C206_CaseStudy.addOrder(orderList, order_missing);
-	    assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
-	  }
+		// Add an item that has missing detail
+		Order order_missing = new Order("Customer Test", "PENDING", true, null);
+		C206_CaseStudy.addOrder(orderList, order_missing);
+		assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
+	}
 
-	  @Test
-	  public void testViewOrder() {
-	    // Test if orderList is not null and empty
-	    assertNotNull("Test if there is valid Order arraylist to add to", orderList);
-	    assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
-	    // Attempt to retrieve the orders
-	    String allOrder = C206_CaseStudy.viewAllOrders(orderList);
-	    String testOutput = "";
-	    // Test if the output is empty
-	    assertEquals("Test that nothing is displayed", testOutput, allOrder);
+	@Test
+	public void testViewOrder() {
+		// Test if orderList is not null and empty
+		assertNotNull("Test if there is valid Order arraylist to add to", orderList);
+		assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+		// Attempt to retrieve the orders
+		String allOrder = C206_CaseStudy.viewAllOrders(orderList);
+		String testOutput = "";
+		// Test if the output is empty
+		assertEquals("Test that nothing is displayed", testOutput, allOrder);
 
-	    C206_CaseStudy.addOrder(orderList, order1);
-	    C206_CaseStudy.addOrder(orderList, order2);
-	    // Test that the list is not empty
-	    assertEquals("Test that Order arraylist size is 2.", 2, orderList.size());
-	    // Attempt to retrieve the orders
-	    allOrder = C206_CaseStudy.viewAllOrders(orderList);
-	    testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
-	    testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
-	    // Test that the details are displayed correctly
-	    assertEquals("Test that the display is correct.", testOutput, allOrder);
+		C206_CaseStudy.addOrder(orderList, order1);
+		C206_CaseStudy.addOrder(orderList, order2);
+		// Test that the list is not empty
+		assertEquals("Test that Order arraylist size is 2.", 2, orderList.size());
+		// Attempt to retrieve the orders
+		allOrder = C206_CaseStudy.viewAllOrders(orderList);
+		testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
+		testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
+		// Test that the details are displayed correctly
+		assertEquals("Test that the display is correct.", testOutput, allOrder);
 
-	    order2.setStatus("READY");
-	    C206_CaseStudy.addOrder(orderList, order2);
-	    assertEquals("Test that Order arrayList size is 2.", 3, orderList.size());
-	    assertEquals("Test that the last item in the arraylist status has changed to READY", "READY",
-	        orderList.get(2).getStatus());
-	    // Attempt to retrieve the orders
-	    allOrder = C206_CaseStudy.viewAllOrders(orderList);
-	    testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
-	    testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
-	    // Test that the details are displayed correctly
-	    assertEquals("Test that the diplay is correct.", testOutput, allOrder);
-	  }
+		order2.setStatus("READY");
+		C206_CaseStudy.addOrder(orderList, order2);
+		assertEquals("Test that Order arrayList size is 2.", 3, orderList.size());
+		assertEquals("Test that the last item in the arraylist status has changed to READY", "READY",
+				orderList.get(2).getStatus());
+		// Attempt to retrieve the orders
+		allOrder = C206_CaseStudy.viewAllOrders(orderList);
+		testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
+		testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
+		// Test that the details are displayed correctly
+		assertEquals("Test that the diplay is correct.", testOutput, allOrder);
+	}
 
-	  @Test
-	  public void testDeleteOrder() {
-	    int initialSize = orderList.size();
+	@Test
+	public void testDeleteOrder() {
+		int initialSize = orderList.size();
 
-	    // Delete an order
-	    C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-	    C206_CaseStudy.deleteOrder();
-	    assertEquals(initialSize - 1, orderList.size());
+		// Delete an order
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		C206_CaseStudy.deleteOrder();
+		assertEquals(initialSize - 1, orderList.size());
 
-	    // Try to delete from an empty list
-	    orderList.clear();
-	    C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-	    C206_CaseStudy.deleteOrder();
-	    assertEquals(0, orderList.size());
+		// Try to delete from an empty list
+		orderList.clear();
+		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+		C206_CaseStudy.deleteOrder();
+		assertEquals(0, orderList.size());
 
-	    // Try to delete using invalid order
-	    orderList.add(order1);
-	    C206_CaseStudy.currentUser = new User("Customer Test2", "c2@gmail.com", "5678");
-	    C206_CaseStudy.deleteOrder();
-	    assertEquals(1, orderList.size());
-	  }
+		// Try to delete using invalid order
+		orderList.add(order1);
+		C206_CaseStudy.currentUser = new User("Customer Test2", "c2@gmail.com", "5678");
+		C206_CaseStudy.deleteOrder();
+		assertEquals(1, orderList.size());
+	}
 
-	
 	@Test
 	public void testAddQueue() {
 		// menu chosen in queue is valid
 		ArrayList<Menu> menuList = new ArrayList<Menu>();
 		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
 		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
-		
+
 		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-		
+
 		C206_CaseStudy.addQueue(orderList, menuList, 1);
-		
+
 		assertEquals("Check if orderList size is 1 after adding order", 1, orderList.size());
 		assertEquals("Check if order user is correct", "Customer Test", orderList.get(0).getUserName());
 		assertEquals("Check if order stall is correct", "XY's Burgs and Fries", orderList.get(0).getItem().getStall());
 		assertEquals("Check if otder item is correct", "Burger", orderList.get(0).getItem().getItemname());
 		assertEquals("Check if order status is PENDING", "PENDING", orderList.get(0).getStatus());
 		assertEquals("Check if order takeaway status is true", true, orderList.get(0).isTakeaway());
-		
+
 		// menu chosen in queue is invalid
 		menuList.add(new Menu("Burger", 5.00, "XY's Burgs and Fries"));
 		menuList.add(new Menu("Fries", 5.00, "XY's Burgs and Fries"));
-		
+
 		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-		
+
 		C206_CaseStudy.addQueue(orderList, menuList, 3);
-		
+
 		assertEquals("Check if orderList size is 0 after invalid menu choice", 0, menuList.size());
-		
+
 		// menuList is empty
 		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-		
+
 		C206_CaseStudy.addQueue(orderList, menuList, 1);
-		
+
 		assertEquals("Check if orderList size is 0 after adding with empty menuList", 0, orderList.size());
 	}
-	
+
 	@Test
 	public void testViewQueue() {
 		// displaying correct information of orders in the queue
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		orderList.add(new Order("Customer Test", "READY", false, menuList.get(0)));
 		orderList.add(new Order("Customer Test2", "PENDING", true, menuList.get(1)));
-		
+
 		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-		
+
 		C206_CaseStudy.viewQueue(orderList);
-		
-		String expectedOutput = "VIEW QUEUE\n" +
-                                "==================\n" +
-                                "QUEUE: 1\n" +
-                                "User: Customer Test\n" +
-                                "Stall: XY's Burgs and Fries\n" +
-                                "Item: Burger\n" +
-                                "Status: PENDING\n" +
-                                "Takeaway: Yes\n" +
-                                "==================\n" +
-                                "QUEUE: 2\n" +
-                                "User: Customer Test\n" +
-                                "Stall: XY's Burgs and Fries\n" +
-                                "Item: Fries\n" +
-                                "Status: PENDING\n" +
-                                "Takeaway: No\n" +
-                                "==================\n";
-		
+
+		String expectedOutput = "VIEW QUEUE\n" + "==================\n" + "QUEUE: 1\n" + "User: Customer Test\n"
+				+ "Stall: XY's Burgs and Fries\n" + "Item: Burger\n" + "Status: PENDING\n" + "Takeaway: Yes\n"
+				+ "==================\n" + "QUEUE: 2\n" + "User: Customer Test\n" + "Stall: XY's Burgs and Fries\n"
+				+ "Item: Fries\n" + "Status: PENDING\n" + "Takeaway: No\n" + "==================\n";
+
 		assertEquals("Check if the output matches the expected output", expectedOutput, outContent.toString());
-		
+
 		// displaying the correct message when there are no orders in the queue
 		C206_CaseStudy.viewQueue(orderList);
-		String expectedOutput1 = "VIEW QUEUE\n" +
-								"==================\n" +
-								"No orders available.\n";
-		
+		String expectedOutput1 = "VIEW QUEUE\n" + "==================\n" + "No orders available.\n";
+
 		assertEquals("Check if the output matches the expected output", expectedOutput1, outContent.toString());
-		
+
 		// method handles a null
 		C206_CaseStudy.viewQueue(null);
 
-		String expectedOutput2 = "VIEW QUEUE\n" +
-				"==================\n" +
-				"No orders available.\n";
+		String expectedOutput2 = "VIEW QUEUE\n" + "==================\n" + "No orders available.\n";
 
 		assertEquals("Check if the output matches the expected output", expectedOutput2, outContent.toString());
 	}
-	
+
 	@Test
 	public void testDeleteQueue() {
 		// deleting a valid order from orderList successfully
 		ArrayList<Order> orderList = new ArrayList<Order>();
 		orderList.add(new Order("Customer Test", "PENDING", true, new Menu("Burger", 5.00, "XY's Burgs and Fries")));
-		
+
 		C206_CaseStudy.deleteQueue(orderList, 1);
-		
+
 		assertEquals("Check if orderList size is 0 after deleting order", 0, orderList.size());
-		
+
 		// deleting an invalid order
 		C206_CaseStudy.deleteQueue(orderList, 2);
-		
+
 		assertEquals("Check if orderList remains unchanged after deleting with invalid order", 1, orderList.size());
 
 		// deleting an order from an empty orderList
 		ArrayList<Order> emptyOrderList = new ArrayList<Order>();
-		
-		C206_CaseStudy.deleteQueue(emptyOrderList, 1);
-		
-		assertEquals("Check if orderList size is 0 after attempting to delete from empty list", 0, emptyOrderList.size());		
-	}
-	
-	@Test
-	 public void testAddFeedback() {
-	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
-	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
-	     // Given an empty list, after adding 1 item, the size of the list is 1
-	     C206_CaseStudy.addFeedback(feedbackList, fb1);
-	     assertEquals("Test that the Feedback arraylist size is 1.", 1, feedbackList.size());
-	     // Add another item
-	     C206_CaseStudy.addFeedback(feedbackList, fb2);
-	     assertEquals("Test that the Feedback arraylist size is now 2.", 2, feedbackList.size());
-	     // The item just added is as same as the last item in the list
-	     assertSame("Test that Feedback is added to the end of the list.", fb2, feedbackList.get(1));
-	     // Add an item that already exists in the list
-	     C206_CaseStudy.addFeedback(feedbackList, fb2);
-	     assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
-	     // Add an item that has missing details
-	     Feedback feedback_missing = new Feedback(3, "", user1);
-	     C206_CaseStudy.addFeedback(feedbackList, feedback_missing);
-	     assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
-	 }
-	 
-	 @Test
-	 public void testViewFeedback() {
-	   //Check if the initial state is as expected
-	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
-	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
-	     // Add some feedback to the list
-	     feedbackList.add(fb1);
-	     feedbackList.add(fb2);
-	     // Test that the list is not empty
-	     assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
-	  
-	 }
-	 @Test
-	 public void testDeleteFeedback() {
-	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
-	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
-	     // Test that the list is not empty
-	     assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
-	     // Delete feedback by index
-	     C206_CaseStudy.deleteFeedback();
-	     // Test that the size of the list is decreased after deletion
-	     assertEquals("Test that Feedback arraylist size is 1 after deletion.", 1, feedbackList.size());
-	     // Delete feedback that doesn't exist
-	     C206_CaseStudy.deleteFeedback(); // Invalid index
-	     // Test that the size of the list remains the same after invalid deletion
-	     assertEquals("Test that Feedback arraylist size is still 1 after invalid deletion.", 1, feedbackList.size());
-	     // Delete feedback by index
-	     C206_CaseStudy.deleteFeedback();
-	     // Test that the list is empty after all feedback are deleted
-	     assertEquals("Test that Feedback arraylist size is 0 after all deletions.", 0, feedbackList.size());
-	 }
-	 
 
+		C206_CaseStudy.deleteQueue(emptyOrderList, 1);
+
+		assertEquals("Check if orderList size is 0 after attempting to delete from empty list", 0,
+				emptyOrderList.size());
+	}
+
+	@Test
+	public void testAddFeedback() {
+		assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+		assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		C206_CaseStudy.addFeedback(feedbackList, fb1);
+		assertEquals("Test that the Feedback arraylist size is 1.", 1, feedbackList.size());
+		// Add another item
+		C206_CaseStudy.addFeedback(feedbackList, fb2);
+		assertEquals("Test that the Feedback arraylist size is now 2.", 2, feedbackList.size());
+		// The item just added is as same as the last item in the list
+		assertSame("Test that Feedback is added to the end of the list.", fb2, feedbackList.get(1));
+		// Add an item that already exists in the list
+		C206_CaseStudy.addFeedback(feedbackList, fb2);
+		assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
+		// Add an item that has missing details
+		Feedback feedback_missing = new Feedback(3, "", user1);
+		C206_CaseStudy.addFeedback(feedbackList, feedback_missing);
+		assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
+	}
+
+	@Test
+	public void testViewFeedback() {
+		// Check if the initial state is as expected
+		assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+		assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+		// Add some feedback to the list
+		feedbackList.add(fb1);
+		feedbackList.add(fb2);
+		// Test that the list is not empty
+		assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
+
+	}
+
+	@Test
+	public void testDeleteFeedback() {
+		assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+		assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+		// Test that the list is not empty
+		assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
+		// Delete feedback by index
+		C206_CaseStudy.deleteFeedback();
+		// Test that the size of the list is decreased after deletion
+		assertEquals("Test that Feedback arraylist size is 1 after deletion.", 1, feedbackList.size());
+		// Delete feedback that doesn't exist
+		C206_CaseStudy.deleteFeedback(); // Invalid index
+		// Test that the size of the list remains the same after invalid deletion
+		assertEquals("Test that Feedback arraylist size is still 1 after invalid deletion.", 1, feedbackList.size());
+		// Delete feedback by index
+		C206_CaseStudy.deleteFeedback();
+		// Test that the list is empty after all feedback are deleted
+		assertEquals("Test that Feedback arraylist size is 0 after all deletions.", 0, feedbackList.size());
+	}
 
 	@After
 	public void tearDown() throws Exception {
