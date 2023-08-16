@@ -8,10 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import mm.C206_CaseStudy;
-import mm.Menu;
-import mm.Order;
-import mm.User;
+
 
 public class C206_CaseStudyTest {
 	// test data
@@ -147,6 +144,7 @@ public class C206_CaseStudyTest {
 	}
 
 	public void testDeleteUser() {
+		
 
 	}
 
@@ -308,19 +306,88 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testAddOrder() {
-		
-	}
+	  public void testAddOrder() {
+	    assertTrue("C206_CaseStudy", true);
+	    assertNotNull("Test if there is valid Order arraylist to add to", orderList);
+	    assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+	    // Given an empty list, after adding 1 item, the size of the list is 1
+	    C206_CaseStudy.addOrder(orderList, order1);
+	    assertEquals("Test that the Order arraylist size is 1.", 1, orderList.size());
 
-	@Test
-	public void testViewOrder() {
-		
-	}
+	    // Add an item
+	    C206_CaseStudy.addOrder(orderList, order2);
+	    assertEquals("Test that the Order arraylist size is now 2.", 2, orderList.size());
 
-	@Test
-	public void testDeleteOrder() {
+	    // The item just added is as same as the last item in the list
+	    assertSame("Test that Order is added to the end of the list.", order2, orderList.get(1));
 
-	}
+	    // Add an item that already exists in the list
+	    C206_CaseStudy.addOrder(orderList, order2);
+	    assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
+
+	    // Add an item that has missing detail
+	    Order order_missing = new Order("Customer Test", "PENDING", true, null);
+	    C206_CaseStudy.addOrder(orderList, order_missing);
+	    assertEquals("Test that the Order arraylist size is unchange.", 2, orderList.size());
+	  }
+
+	  @Test
+	  public void testViewOrder() {
+	    // Test if orderList is not null and empty
+	    assertNotNull("Test if there is valid Order arraylist to add to", orderList);
+	    assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+	    // Attempt to retrieve the orders
+	    String allOrder = C206_CaseStudy.viewAllOrders(orderList);
+	    String testOutput = "";
+	    // Test if the output is empty
+	    assertEquals("Test that nothing is displayed", testOutput, allOrder);
+
+	    C206_CaseStudy.addOrder(orderList, order1);
+	    C206_CaseStudy.addOrder(orderList, order2);
+	    // Test that the list is not empty
+	    assertEquals("Test that Order arraylist size is 2.", 2, orderList.size());
+	    // Attempt to retrieve the orders
+	    allOrder = C206_CaseStudy.viewAllOrders(orderList);
+	    testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
+	    testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
+	    // Test that the details are displayed correctly
+	    assertEquals("Test that the display is correct.", testOutput, allOrder);
+
+	    order2.setStatus("READY");
+	    C206_CaseStudy.addOrder(orderList, order2);
+	    assertEquals("Test that Order arrayList size is 2.", 3, orderList.size());
+	    assertEquals("Test that the last item in the arraylist status has changed to READY", "READY",
+	        orderList.get(2).getStatus());
+	    // Attempt to retrieve the orders
+	    allOrder = C206_CaseStudy.viewAllOrders(orderList);
+	    testOutput = String.format("%-15s %-10s %-10s %s\n", "Customer Test", "READY", false, "Fries");
+	    testOutput += String.format("%-15s %-10s %-10s %s\n", "Customer Test2", "PENDING", true, "Ricecake");
+	    // Test that the details are displayed correctly
+	    assertEquals("Test that the diplay is correct.", testOutput, allOrder);
+	  }
+
+	  @Test
+	  public void testDeleteOrder() {
+	    int initialSize = orderList.size();
+
+	    // Delete an order
+	    C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+	    C206_CaseStudy.deleteOrder();
+	    assertEquals(initialSize - 1, orderList.size());
+
+	    // Try to delete from an empty list
+	    orderList.clear();
+	    C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
+	    C206_CaseStudy.deleteOrder();
+	    assertEquals(0, orderList.size());
+
+	    // Try to delete using invalid order
+	    orderList.add(order1);
+	    C206_CaseStudy.currentUser = new User("Customer Test2", "c2@gmail.com", "5678");
+	    C206_CaseStudy.deleteOrder();
+	    assertEquals(1, orderList.size());
+	  }
+
 	
 	@Test
 	public void testAddQueue() {
