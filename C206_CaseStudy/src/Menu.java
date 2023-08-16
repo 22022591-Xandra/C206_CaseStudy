@@ -36,7 +36,6 @@ public class Menu {
 		
 	}
 	public boolean getIsAvailable() {
-	
 		return false;
 	}
 	

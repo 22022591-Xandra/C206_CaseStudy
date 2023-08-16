@@ -37,7 +37,6 @@ public class Stall {
 		
 	}
 	public boolean getIsAvailable() {
-	
 		return false;
 	}
 }

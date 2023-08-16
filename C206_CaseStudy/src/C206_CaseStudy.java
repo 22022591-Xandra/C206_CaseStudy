@@ -205,7 +205,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static String viewMenu(ArrayList<Menu>menuList) {
+	public static void viewMenu(ArrayList<Menu>menuList) {
 		Helper.line(50, "=");
 		System.out.println("MENU");
 		Helper.line(50, "=");
@@ -222,7 +222,7 @@ public class C206_CaseStudy {
 			}
 			output += "\n";
 		}
-		return output;
+		System.out.println();;
 	}
 
 	public static void addMenu(ArrayList<Menu>menuList, Menu menu) {
