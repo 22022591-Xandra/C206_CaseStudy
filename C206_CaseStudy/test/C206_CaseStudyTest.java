@@ -212,8 +212,21 @@ public class C206_CaseStudyTest {
 	}
 
 	public void testDeleteStall() {
+		int initialSize = stallList.size();
+        // delete a stall in the list
+        C206_CaseStudy.deleteStall();
+        assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
+        
+        // delete stall with last index
+        C206_CaseStudy.deleteStall();
+        assertEquals("Stall list size should decrease by 1", initialSize - 1, stallList.size());
+        
+        //delete stall with invalid index
+        C206_CaseStudy.deleteStall(); // Index out of bounds
+        assertEquals("Stall list size should remain the same", initialSize, stallList.size());
+    }
+        
 
-	}
 
 	@Test
 	public void testAddMenu() {
