@@ -496,6 +496,61 @@ public class C206_CaseStudyTest {
 		
 		assertEquals("Check if orderList size is 0 after attempting to delete from empty list", 0, emptyOrderList.size());		
 	}
+	
+	@Test
+	 public void testAddFeedback() {
+	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+	     // Given an empty list, after adding 1 item, the size of the list is 1
+	     C206_CaseStudy.addFeedback(feedbackList, fb1);
+	     assertEquals("Test that the Feedback arraylist size is 1.", 1, feedbackList.size());
+	     // Add another item
+	     C206_CaseStudy.addFeedback(feedbackList, fb2);
+	     assertEquals("Test that the Feedback arraylist size is now 2.", 2, feedbackList.size());
+	     // The item just added is as same as the last item in the list
+	     assertSame("Test that Feedback is added to the end of the list.", fb2, feedbackList.get(1));
+	     // Add an item that already exists in the list
+	     C206_CaseStudy.addFeedback(feedbackList, fb2);
+	     assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
+	     // Add an item that has missing details
+	     Feedback feedback_missing = new Feedback(3, "", user1);
+	     C206_CaseStudy.addFeedback(feedbackList, feedback_missing);
+	     assertEquals("Test that the Feedback arraylist size is unchanged.", 2, feedbackList.size());
+	 }
+	 
+	 @Test
+	 public void testViewFeedback() {
+	   //Check if the initial state is as expected
+	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+	     // Add some feedback to the list
+	     feedbackList.add(fb1);
+	     feedbackList.add(fb2);
+	     // Test that the list is not empty
+	     assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
+	  
+	 }
+	 @Test
+	 public void testDeleteFeedback() {
+	     assertNotNull("Test if there is valid Feedback arraylist to add to", feedbackList);
+	     assertEquals("Test that the Feedback arraylist is empty.", 0, feedbackList.size());
+	     // Test that the list is not empty
+	     assertEquals("Test that Feedback arraylist size is 2.", 2, feedbackList.size());
+	     // Delete feedback by index
+	     C206_CaseStudy.deleteFeedback();
+	     // Test that the size of the list is decreased after deletion
+	     assertEquals("Test that Feedback arraylist size is 1 after deletion.", 1, feedbackList.size());
+	     // Delete feedback that doesn't exist
+	     C206_CaseStudy.deleteFeedback(); // Invalid index
+	     // Test that the size of the list remains the same after invalid deletion
+	     assertEquals("Test that Feedback arraylist size is still 1 after invalid deletion.", 1, feedbackList.size());
+	     // Delete feedback by index
+	     C206_CaseStudy.deleteFeedback();
+	     // Test that the list is empty after all feedback are deleted
+	     assertEquals("Test that Feedback arraylist size is 0 after all deletions.", 0, feedbackList.size());
+	 }
+	 
+
 
 	@After
 	public void tearDown() throws Exception {
