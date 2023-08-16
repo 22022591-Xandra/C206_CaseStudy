@@ -15,7 +15,7 @@ public class Order {
 	private String status;
 	private boolean takeaway;
 	private Menu item;
-	
+
 	public Order(String userName, String status, boolean takeaway, Menu item) {
 		super();
 		this.userName = userName;
@@ -42,29 +42,5 @@ public class Order {
 
 	public Menu getItem() {
 		return item;
-	}
-
-	/**
-	 * @param b
-	 */
-	public void setCompleted(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/**
-	 * @return
-	 */
-	public Object isCompleted() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @return
-	 */
-	public Object getOrderID() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

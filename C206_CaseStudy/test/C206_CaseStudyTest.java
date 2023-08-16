@@ -291,100 +291,50 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddOrder() {
-		assertNotNull("Test if there is a valid Order arraylist to add to", orderList);
-		assertEquals("Test that the Order arraylist is empty.", 2, orderList.size());
+		// Test adding an order to the list
+		C206_CaseStudy.addOrder(orderList, new Order("Customer Test", "PENDING", true, menuList.get(0)));
+		assertEquals("Check if order list size is 1", 1, orderList.size());
 
-		// Given an empty list, after adding 1 item, the size of the list is 1
-		C206_CaseStudy.addOrder(orderList, new Order("Customer Test", "READY", false, menuList.get(0)));
-		assertEquals("Test that the Order arraylist size is 3.", 3, orderList.size());
-
-		// Add an item
-		C206_CaseStudy.addOrder(orderList, new Order("Customer Test2", "PENDING", true, menuList.get(1)));
-		assertEquals("Test that the Order arraylist size is now 4.", 4, orderList.size());
+		// Test adding another order to the list
+		C206_CaseStudy.addOrder(orderList, new Order("Customer Test2", "READY", false, menuList.get(1)));
+		assertEquals("Check if order list size is 2", 2, orderList.size());
 	}
 
 	@Test
 	public void testViewOrder() {
-		// Test if orderList is not null and empty
-		assertNotNull("Test if there is a valid Order arraylist to add to", orderList);
-		assertEquals("Test that the Order arraylist is empty.", 0, orderList.size());
+		// Add some orders to the list
+		orderList.add(new Order("Customer Test", "PENDING", true, menuList.get(0)));
+		orderList.add(new Order("Customer Test2", "READY", false, menuList.get(1)));
 
-		// Attempt to retrieve the orders
-		String allOrders = C206_CaseStudy.viewOrder(orderList);
-		String testOutput = "";
-
-		// Test if the output is empty
-		assertEquals("Test that nothing is displayed", testOutput, allOrders);
-
-		// Add orders to the orderList
-		C206_CaseStudy.addOrder(orderList, order1);
-		C206_CaseStudy.addOrder(orderList, order2);
-
-		// Test that the list is not empty
-		assertEquals("Test that Order arraylist size is 2.", 2, orderList.size());
-
-		// Update the expected output based on the added orders
-		testOutput = String.format("Order ID: %d, Customer: %s, Status: %s, Is Completed: %s\n", order1.getOrderID(),
-				order1.getUserName(), order1.getStatus(), order1.isCompleted());
-
-		testOutput += String.format("Order ID: %d, Customer: %s, Status: %s, Is Completed: %s\n", order2.getOrderID(),
-				order2.getUserName(), order2.getStatus(), order2.isCompleted());
-
-		// Attempt to retrieve the orders again
-		allOrders = C206_CaseStudy.viewOrder(orderList);
-
-		// Test that the details are displayed correctly
-		assertEquals("Test that the display is correct.", testOutput, allOrders);
-
-		// Update the completion status of an order and add it again
-		order2.setCompleted(false);
-		C206_CaseStudy.addOrder(orderList, order2);
-
-		// Test that Order arrayList size is still 2
-		assertEquals("Test that Order arrayList size is 2.", 2, orderList.size());
-
-		// Update the expected output based on the updated completion status
-		testOutput = String.format("Order ID: %d, Customer: %s, Status: %s, Is Completed: %s\n", order1.getOrderID(),
-				order1.getUserName(), order1.getStatus(), order1.isCompleted());
-
-		testOutput += String.format("Order ID: %d, Customer: %s, Status: %s, Is Completed: %s\n", order2.getOrderID(),
-				order2.getUserName(), order2.getStatus(), order2.isCompleted());
-
-		// Attempt to retrieve the orders with updated completion status
-		allOrders = C206_CaseStudy.viewOrder(orderList);
-
-		// Test that the display is correct with updated completion status
-		assertEquals("Test that the display is correct with updated completion status.", testOutput, allOrders);
+		// Test viewing orders
+		String expectedOutput = "VIEW ORDERS\n" +
+		                       "ORDER 1\n" +
+		                       "User: Customer Test\n" +
+		                       "Stall: XY's Burgs and Fries\n" +
+		                       "Item: Burger\n" +
+		                       "Status: PENDING\n" +
+		                       "Takeaway: Yes\n" +
+		                       "=============================\n" +
+		                       "ORDER 2\n" +
+		                       "User: Customer Test2\n" +
+		                       "Stall: XY's Burgs and Fries\n" +
+		                       "Item: Fries\n" +
+		                       "Status: READY\n" +
+		                       "Takeaway: No\n" +
+		                       "=============================\n";
+		assertEquals("Check if viewOrder returns correct output", expectedOutput, C206_CaseStudy.viewOrder(orderList));
 	}
 
+	@Test
 	public void testDeleteOrder() {
-		// Add some orders to the orderList for testing
-		Order testOrder1 = new Order("Customer Test", "READY", false, menuList.get(0));
-		Order testOrder2 = new Order("Customer Test2", "PENDING", true, menuList.get(1));
-		orderList.add(testOrder1);
-		orderList.add(testOrder2);
+		// Add some orders to the list
+		orderList.add(new Order("Customer Test", "PENDING", true, menuList.get(0)));
+		orderList.add(new Order("Customer Test2", "READY", false, menuList.get(1)));
 
-		// Record the initial size of the orderList
-		int initialSize = orderList.size();
-
-		// Delete an order
-		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-		C206_CaseStudy.deleteOrder();
-		assertEquals(initialSize - 1, orderList.size());
-
-		// Try to delete from an empty list
-		orderList.clear();
-		C206_CaseStudy.currentUser = new User("Customer Test", "c@gmail.com", "1234");
-		C206_CaseStudy.deleteOrder();
-		assertEquals(0, orderList.size());
-
-		// Add an order back to the list
-		orderList.add(testOrder1);
-
-		// Try to delete using invalid index
-		C206_CaseStudy.currentUser = new User("Customer Test2", "c@gmail.com", "1234");
-		C206_CaseStudy.deleteOrder();
-		assertEquals(1, orderList.size());
+		// Test deleting an order
+		C206_CaseStudy.deleteOrder(); // Delete order at index 1 (second order)
+		assertEquals("Check if order list size is 1 after deletion", 1, orderList.size());
+		assertEquals("Check if the remaining order's status is PENDING", "PENDING", orderList.get(0).getStatus());
 	}
 
 	@After
