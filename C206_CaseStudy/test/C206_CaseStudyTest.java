@@ -141,6 +141,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that the diplay is correct.", testOutput, allUser);
 	}
 
+	@Test
 	public void testDeleteUser() {
 		int initialSize = userList.size();
 		// Delete an user
